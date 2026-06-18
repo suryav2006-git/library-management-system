@@ -1,4 +1,4 @@
-package com.surya.projects.librarymanagementsystem;
+package com.surya;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
