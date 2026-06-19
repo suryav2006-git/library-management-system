@@ -1,7 +1,11 @@
 package com.surya.modal;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,7 +53,19 @@ public class Genre {
     private Genre parentGenere;
 
     @OneToMany
-    private List<Genre> subGenres = new ArrayList<Genre>();
+    private List<Genre> subGenres = new ArrayList<Genre>(); 
+
+    // @OneToMany(mappedBy = "Genre", cascade = CascadeType.PERSIST)
+    // private List<Book> books = new ArrayList<Book>();
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
+
+
 
 
 
