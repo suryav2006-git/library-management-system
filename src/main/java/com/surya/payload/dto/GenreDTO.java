@@ -17,7 +17,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class GenreDTO {
 
     private Long id;
@@ -31,8 +30,8 @@ public class GenreDTO {
     @Size(max = 500, message = "Description Must Not Exceed 500 Characters!")
     private String description;
 
+    @Builder.Default
     @Min(value = 0, message = "Display Order Cannot Be Negative")
-
     private Integer displayOrder=0;
 
     private boolean active;

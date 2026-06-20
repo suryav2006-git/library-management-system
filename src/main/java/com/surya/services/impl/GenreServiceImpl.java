@@ -1,5 +1,8 @@
 package com.surya.services.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.surya.mapper.GenreMapper;
@@ -30,7 +33,9 @@ public class GenreServiceImpl implements GenreService{
             .build();
 
         if(genreDTO.getParentGenreId() != null) {
-            Genre parentGenre = genreRepository.findById(genreDTO.getParentGenreId()).get();
+            Genre parentGenre = genreRepository.findById(genreDTO.getParentGenreId())
+                .orElseThrow(() -> new RuntimeException("Parent genre not found with id: " + genreDTO.getParentGenreId()));
+
             genre.setParentGenere(parentGenre);
         }
 
@@ -41,6 +46,15 @@ public class GenreServiceImpl implements GenreService{
 
         return dto;
     }
+
+    @Override
+    public List<GenreDTO> getAllGenres() {
+        return genreRepository.findAll().stream()
+                        .map(GenreMapper::toDTO)
+                        .collect(Collectors.toList());
+    }
+
+    
 
 
 }

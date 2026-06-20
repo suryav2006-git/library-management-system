@@ -45,16 +45,19 @@ public class Genre {
     @Size(max = 500, message = "Description Must Not Exceed 500 Characters!")
     private String description;
 
+    @Builder.Default
     @Min(value = 0, message = "Display Order Cannot Be Negative")
     private Integer displayOrder=0;
 
+    @Builder.Default
     @Column(nullable = false)
     private Boolean active=true;
 
     @ManyToOne
     private Genre parentGenere;
 
-    @OneToMany
+    @Builder.Default
+    @OneToMany(mappedBy = "parentGenere")
     private List<Genre> subGenres = new ArrayList<Genre>(); 
 
     // @OneToMany(mappedBy = "Genre", cascade = CascadeType.PERSIST)
