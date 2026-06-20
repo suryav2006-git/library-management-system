@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.surya.modal.Genre;
+import com.surya.payload.dto.GenreDTO;
 import com.surya.services.GenreService;
 
 import lombok.RequiredArgsConstructor;
@@ -19,9 +19,10 @@ public class GenreController {
     private final GenreService genreService;
 
     @PostMapping("/create") 
-    public ResponseEntity<Genre> addGenre(@RequestBody Genre genre) {
-        Genre createdGenre = genreService.creatGenre(genre);
+    public ResponseEntity<GenreDTO> addGenre(@RequestBody GenreDTO genre) {
+        GenreDTO createdGenre = genreService.createGenre(genre);
         return ResponseEntity.ok(createdGenre);
+        
     }
 }
 

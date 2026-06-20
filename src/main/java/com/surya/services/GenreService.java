@@ -1,9 +1,8 @@
 package com.surya.services;
 
-import com.surya.modal.Genre;
+import com.surya.payload.dto.GenreDTO;
 
 public interface GenreService {
 
-
-    Genre creatGenre(Genre genre);
+    GenreDTO createGenre(GenreDTO genreDTO);
 }
