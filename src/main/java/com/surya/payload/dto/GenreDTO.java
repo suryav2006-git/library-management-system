@@ -32,6 +32,7 @@ public class GenreDTO {
     private String description;
 
     @Min(value = 0, message = "Display Order Cannot Be Negative")
+
     private Integer displayOrder=0;
 
     private boolean active;
