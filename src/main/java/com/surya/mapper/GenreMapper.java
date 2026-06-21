@@ -1,5 +1,6 @@
 package com.surya.mapper;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
@@ -90,6 +91,10 @@ public class GenreMapper {
         }
         
 
+    }
+
+    public List<GenreDTO> toDTOList(List<Genre> genreList) {
+        return genreList.stream().map(genre -> toDTO(genre)).collect(Collectors.toList());
     }
 
 
