@@ -34,7 +34,7 @@ public class GenreDTO {
     @Min(value = 0, message = "Display Order Cannot Be Negative")
     private Integer displayOrder=0;
 
-    private boolean active;
+    private Boolean active;
 
     private Long parentGenreId;
 
@@ -47,6 +47,8 @@ public class GenreDTO {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    
     
 
 
