@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.surya.exception.GenreException;
@@ -43,7 +42,7 @@ public class GenreController {
 
     @GetMapping("/{genreId}") 
     public ResponseEntity<?> getGenreById(
-            @RequestParam("genreId") Long genreId
+            @PathVariable("genreId") Long genreId
         ) throws GenreException {
         
         GenreDTO genres = genreService.getGenreById(genreId);
@@ -53,7 +52,7 @@ public class GenreController {
 
     @PutMapping("/{genreId}") 
     public ResponseEntity<?> updateGenre(
-            @RequestParam("genreId") Long genreId,
+            @PathVariable("genreId") Long genreId,
             @RequestBody GenreDTO genre
         ) throws GenreException {
         
@@ -64,7 +63,7 @@ public class GenreController {
 
     @DeleteMapping("/{genreId}") 
     public ResponseEntity<?> deleteGenre(
-            @RequestParam("genreId") Long genreId
+            @PathVariable("genreId") Long genreId
         ) throws GenreException {
         
         genreService.deleteGenre(genreId);
@@ -75,7 +74,7 @@ public class GenreController {
 
     @DeleteMapping("/{genreId}/hard") 
     public ResponseEntity<?> hardDeleteGenre(
-            @RequestParam("genreId") Long genreId
+            @PathVariable("genreId") Long genreId
         ) throws GenreException {
         
         genreService.hardDeleteGenre(genreId);
