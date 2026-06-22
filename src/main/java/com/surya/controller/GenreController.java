@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -80,6 +81,29 @@ public class GenreController {
         genreService.hardDeleteGenre(genreId);
         ApiResponse response = new ApiResponse("Genre deleted - Hard Delete", true);
         return ResponseEntity.ok(response);
+        
+    }
+
+    @GetMapping("/top-level") 
+    public ResponseEntity<?> getTopLevelGenres() {
+        List<GenreDTO> genres = genreService.getTopLevelGenres();
+        return ResponseEntity.ok(genres);
+        
+    }
+    
+    @GetMapping("/count") 
+    public ResponseEntity<?> getTotalActiveGenres() {
+        Long genres = genreService.getTotalActiveGenres();
+        return ResponseEntity.ok(genres);
+        
+    }
+
+    @GetMapping("/{id}/book-count") 
+    public ResponseEntity<?> getBookCountByGenres(
+            @PathVariable Long id
+    ) {
+        Long count = genreService.getBookCountByGenre(id);
+        return ResponseEntity.ok(count);
         
     }
 
