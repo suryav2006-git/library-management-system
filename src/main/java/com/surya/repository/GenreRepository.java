@@ -10,7 +10,7 @@ public interface GenreRepository extends JpaRepository<Genre, Long>{
 
     List<Genre> findByActiveTrueOrderByDisplayOrderAsc();
 
-    List<Genre> findByParentGenreIsNUllAndActiveTrueOrderByDisplayOrderAsc();
+    List<Genre> findByParentGenreIsNullAndActiveTrueOrderByDisplayOrderAsc();
 
     List<Genre> findByParentGenreIdAndActiveTrueOrderByDisplayOrderAsc(
         Long parentGenreId
