@@ -54,10 +54,10 @@ public class Genre {
     private Boolean active=true;
 
     @ManyToOne
-    private Genre parentGenere;
+    private Genre parentGenre;
 
     @Builder.Default
-    @OneToMany(mappedBy = "parentGenere")
+    @OneToMany(mappedBy = "parentGenre")
     private List<Genre> subGenres = new ArrayList<Genre>(); 
 
     // @OneToMany(mappedBy = "Genre", cascade = CascadeType.PERSIST)

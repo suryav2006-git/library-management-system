@@ -33,9 +33,9 @@ public class GenreMapper {
             .updatedAt(savedGenre.getUpdatedAt())
             .build();
 
-        if(savedGenre.getParentGenere()!=null) {
-            dto.setParentGenreId(savedGenre.getParentGenere().getId());
-            dto.setParentGenreName(savedGenre.getParentGenere().getName());
+        if(savedGenre.getParentGenre()!=null) {
+            dto.setParentGenreId(savedGenre.getParentGenre().getId());
+            dto.setParentGenreName(savedGenre.getParentGenre().getName());
         }
 
         if(savedGenre.getSubGenres() != null && !savedGenre.getSubGenres().isEmpty()) {
@@ -66,7 +66,7 @@ public class GenreMapper {
         
         if(genreDTO.getParentGenreId() != null) {
             genreRepository.findById(genreDTO.getParentGenreId())
-                .ifPresent(genre::setParentGenere);
+                .ifPresent(genre::setParentGenre);
 
         }
         return genre;
@@ -87,7 +87,7 @@ public class GenreMapper {
 
         if(dto.getParentGenreId() != null) {
             genreRepository.findById(dto.getParentGenreId())
-                .ifPresent(existingGenre::setParentGenere);
+                .ifPresent(existingGenre::setParentGenre);
         }
         
 
