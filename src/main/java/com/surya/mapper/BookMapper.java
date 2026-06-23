@@ -17,11 +17,15 @@ public class BookMapper {
         if(book == null) {
             return null;
         }
-        BookDTO dto = BookDTO.builder()
+
+        return BookDTO.builder()
             .id(book.getId())
             .title(book.getTitle())
             .author(book.getAuthor())
             .isbn(book.getIsbn())
+            .genreId(book.getGenre().getId())
+            .genreName(book.getGenre().getName())
+            .genreCode(book.getGenre().getCode())
             .publisher(book.getPublisher())
             .publishedDate(book.getPublishedDate())
             .language(book.getLanguage())
@@ -36,8 +40,7 @@ public class BookMapper {
             .updatedAt(book.getUpdatedAt())
             .build();
 
-            
-        return dto;
+        
     }
 
 
