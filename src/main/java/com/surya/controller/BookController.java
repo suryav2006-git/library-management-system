@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.surya.exception.BookException;
@@ -81,6 +82,30 @@ public class BookController {
     ) throws BookException {
         bookService.hardDeleteBook(id);
         return ResponseEntity.ok(new ApiResponse("Book Hard deleted successfully", true));
+    }
+
+    @GetMapping
+    public ResponseEntity<PageResponse<BookDTO>> searchBooks(
+        @RequestParam(required = false) Long genreId,
+        @RequestParam(required = false, defaultValue = "false") Boolean availableOnly,
+        @RequestParam(defaultValue = "true") boolean activeOnly,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "20") int size,
+        @RequestParam(defaultValue = "createdAt") String sortBy,
+        @RequestParam(defaultValue = "DESC") String sortDirection
+    ) {
+
+        BookSearchRequest searchRequest = new BookSearchRequest();
+        searchRequest.setGenreId(genreId);
+        searchRequest.setAvailableOnly(availableOnly);
+        searchRequest.setPage(page);
+        searchRequest.setSize(size);
+        searchRequest.setSortBy(sortBy);
+        searchRequest.setSortDirection(sortDirection);
+
+        PageResponse<BookDTO> books = bookService.searchBooksWithFilters(searchRequest);
+        return ResponseEntity.ok(books);
+        
     }
 
     @PostMapping("/search")
