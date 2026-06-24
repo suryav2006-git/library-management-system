@@ -3,13 +3,20 @@ package com.surya.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.surya.exception.BookException;
 import com.surya.payload.dto.BookDTO;
+import com.surya.payload.request.BookSearchRequest;
+import com.surya.payload.response.ApiResponse;
+import com.surya.payload.response.PageResponse;
 import com.surya.services.BookService;
 
 import jakarta.validation.Valid;
@@ -41,6 +48,65 @@ public class BookController {
         List<BookDTO> createdBooks = bookService.createBooksBulk(bookDTOs);
         return ResponseEntity.ok(createdBooks);
 
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BookDTO> getBookById(
+        @PathVariable Long id
+    ) throws BookException {
+        BookDTO book = bookService.getBookById(id);
+        return ResponseEntity.ok(book);
+    }
+
+    @PutMapping("/{id}") 
+    public ResponseEntity<BookDTO> updateBook(
+        @PathVariable Long id,
+        @Valid @RequestBody BookDTO bookDTO
+    ) throws BookException {
+            BookDTO updatedBook = bookService.updateBook(id, bookDTO);
+            return ResponseEntity.ok(updatedBook);
+    }
+
+    @DeleteMapping("/{id}") 
+    public ResponseEntity<ApiResponse> deleteBook(
+        @PathVariable Long id
+    ) throws BookException {
+        bookService.deleteBook(id);
+        return ResponseEntity.ok(new ApiResponse("Book Soft deleted successfully", true));
+    }
+
+    @DeleteMapping("/{id}/permanent") 
+    public ResponseEntity<ApiResponse> hardDeleteBook(
+        @PathVariable Long id
+    ) throws BookException {
+        bookService.hardDeleteBook(id);
+        return ResponseEntity.ok(new ApiResponse("Book Hard deleted successfully", true));
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<PageResponse<BookDTO>> advancedSearch(
+        @RequestBody BookSearchRequest searchRequest    
+    ) {
+        PageResponse<BookDTO> books = bookService.searchBooksWithFilters(searchRequest);
+        return ResponseEntity.ok(books);
+    }
+
+    @GetMapping("/stats") 
+    public ResponseEntity<BookStatsResponse> getBookStatus() {
+        long totalActive = bookService.getTotalActiveBooks();
+        long totalAvailable = bookService.getTotalAvailableBooks();
+        
+        BookStatsResponse stats = new BookStatsResponse(totalActive, totalAvailable);
+        return ResponseEntity.ok(stats);
+    }
+
+    public static class BookStatsResponse {
+        public long totalActiveBooks;
+        public long totalAvailableBooks;
+        public BookStatsResponse(long totalActiveBooks, long totalAvailableBooks) {
+            this.totalActiveBooks = totalActiveBooks;
+            this.totalAvailableBooks = totalAvailableBooks;
+        }
     }
 
 
