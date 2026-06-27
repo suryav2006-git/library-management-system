@@ -28,7 +28,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> signupHandler(
-        @RequestBody @Valid UserDTO req
+        @Valid @RequestBody UserDTO req
     ) throws UserException {
         AuthResponse res = authService.signup(req);
         return ResponseEntity.ok(res);
@@ -36,7 +36,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> loginHandler(
-        @RequestBody @Valid LoginRequest req
+        @Valid @RequestBody  LoginRequest req
     ) throws UserException {
         AuthResponse res = authService.login(req.getUsername(), req.getPassword());
         return ResponseEntity.ok(res);

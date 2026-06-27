@@ -77,7 +77,7 @@ public class AuthServiceImpl implements AuthService{
     @Override
     public AuthResponse signup(UserDTO req) throws UserException {
         User user = userRepository.findByEmail(req.getEmail());
-        if(user==null) {
+        if(user!=null) {
             throw new UserException("Email Id Already Registered");
         }
         User createdUser =new User();

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class LoginRequest {
 
     @NotNull(message = "Username or Email is Mandatory")
-    private String username;
+    private String email;
     
     @NotNull(message = "Password is Mandatory")
     private String password;
