@@ -46,7 +46,7 @@ public class SecurityConfig {
                 cfg.setAllowCredentials(true);
                 cfg.setAllowedOrigins(
                     Arrays.asList(
-                        "http://localhost:",
+                        "http://localhost:5173/",
                         "https://mrstudieshelperlibrary.com"
                     )
                 );

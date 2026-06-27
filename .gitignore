@@ -43,3 +43,4 @@ launch.json
 
 ### VS Code ###
 .vscode/
+.env
