@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.surya.configurations.JwtProvider;
 import com.surya.domain.UserRole;
 import com.surya.exception.UserException;
+import com.surya.mapper.UserMapper;
 import com.surya.modal.User;
 import com.surya.payload.dto.UserDTO;
 import com.surya.payload.response.AuthResponse;
