@@ -4,6 +4,13 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Spring Boot Secret Files ###
+**/src/main/resources/application-local.properties
+**/src/main/resources/application-local.yml
+**/src/main/resources/application.properties.local
+.env
+
+
 ### STS ###
 .apt_generated
 .classpath
@@ -28,6 +35,11 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+### Launch Configurations ###
+.vscode/launch.json
+launch.json
+
 
 ### VS Code ###
 .vscode/
