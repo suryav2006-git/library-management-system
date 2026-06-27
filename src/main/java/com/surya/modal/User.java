@@ -1,5 +1,13 @@
 package com.surya.modal;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.surya.domain.Authprovider;
+import com.surya.domain.UserRole;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,9 +35,26 @@ public class User {
 
     private String fullName;
 
-    private String role;
+    private UserRole role;
+
+    private String Phone;
+
+    @Builder.Default
+    private Authprovider authProvider = Authprovider.LOCAL; 
+
+    private String googleId;
+
+    private String profileImage;
 
     private String password;
+
+    private LocalDateTime lastLogin;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
 
 
