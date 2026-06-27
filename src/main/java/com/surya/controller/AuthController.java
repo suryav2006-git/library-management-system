@@ -38,7 +38,7 @@ public class AuthController {
     public ResponseEntity<AuthResponse> loginHandler(
         @Valid @RequestBody  LoginRequest req
     ) throws UserException {
-        AuthResponse res = authService.login(req.getUsername(), req.getPassword());
+        AuthResponse res = authService.login(req.getEmail(), req.getPassword());
         return ResponseEntity.ok(res);
     }
 
