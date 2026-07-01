@@ -44,3 +44,6 @@ launch.json
 ### VS Code ###
 .vscode/
 .env
+
+#Local Codium ? Windsurf AI Configurations
+.codeiumignore
