@@ -9,8 +9,6 @@ import com.surya.domain.Authprovider;
 import com.surya.domain.UserRole;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,7 +34,6 @@ public class User {
 
     private String fullName;
 
-    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     private String Phone;
