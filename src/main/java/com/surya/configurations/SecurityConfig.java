@@ -24,18 +24,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-        .sessionManagement(management -> management.sessionCreationPolicy(
-                SessionCreationPolicy.STATELESS
-        ))    
-        .authorizeHttpRequests(Authorize -> Authorize
-            .requestMatchers("/api/**").authenticated()
-            .requestMatchers("/api/admin/**").hasRole("ADMIN")
-            .anyRequest().permitAll()
-        )
-        .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class)
-        .csrf(AbstractHttpConfigurer::disable)
-        .cors( cors -> cors.configurationSource(corsConfigurationSource()))
-        .build();
+                .sessionManagement(management -> management.sessionCreationPolicy(
+                        SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(Authorize -> Authorize
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/**").authenticated()
+                        .anyRequest().permitAll())
+                .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class)
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .build();
     }
 
     private CorsConfigurationSource corsConfigurationSource() {
@@ -45,11 +43,9 @@ public class SecurityConfig {
                 CorsConfiguration cfg = new CorsConfiguration();
                 cfg.setAllowCredentials(true);
                 cfg.setAllowedOrigins(
-                    Arrays.asList(
-                        "http://localhost:5173/",
-                        "https://mrstudieshelperlibrary.com"
-                    )
-                );
+                        Arrays.asList(
+                                "http://localhost:5173/",
+                                "https://mrstudieshelperlibrary.com"));
                 cfg.setAllowedMethods(Collections.singletonList("*"));
                 cfg.setAllowedHeaders(Collections.singletonList("*"));
                 cfg.setExposedHeaders(Collections.singletonList("Authorization"));
@@ -63,6 +59,5 @@ public class SecurityConfig {
     public PasswordEncoder passswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 
 }
