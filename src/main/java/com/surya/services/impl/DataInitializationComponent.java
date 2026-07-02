@@ -1,5 +1,6 @@
 package com.surya.services.impl;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -11,14 +12,19 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class DataInitializationComponent {
+public class DataInitializationComponent implements CommandLineRunner {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Override
+    public void run(String... args) {
+        initializeAdminUser();
+    }
+
     private void initializeAdminUser() {
         String adminEmail = "mrstudieshelper@gmail.com";
-        String adminPassword = System.getenv("MAIL_PASSWORD");
+        String adminPassword = "mrstudieshelper";
 
         if (userRepository.findByEmail(adminEmail) == null) {
             User user = User.builder()
@@ -28,7 +34,7 @@ public class DataInitializationComponent {
                     .role(UserRole.ROLE_ADMIN)
                     .build();
 
-            userRepository.save(user);
+            User admin = userRepository.save(user);
         }
     }
 

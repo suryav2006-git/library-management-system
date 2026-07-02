@@ -9,6 +9,8 @@ import com.surya.domain.Authprovider;
 import com.surya.domain.UserRole;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,7 +28,6 @@ import lombok.Setter;
 @Builder
 public class User {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -35,12 +36,13 @@ public class User {
 
     private String fullName;
 
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     private String Phone;
 
     @Builder.Default
-    private Authprovider authProvider = Authprovider.LOCAL; 
+    private Authprovider authProvider = Authprovider.LOCAL;
 
     private String googleId;
 
@@ -55,8 +57,5 @@ public class User {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-
-
 
 }
