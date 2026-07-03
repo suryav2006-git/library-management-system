@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
             throw new Exception("User Not Found");
         }
 
-        return null;
+        return user;
     }
 
     @Override
