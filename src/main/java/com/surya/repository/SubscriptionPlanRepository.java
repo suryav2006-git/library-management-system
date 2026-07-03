@@ -6,4 +6,6 @@ import com.surya.modal.SubscriptionPlan;;
 
 public interface SubscriptionPlanRepository extends JpaRepository<SubscriptionPlan, Long> {
 
+    Boolean existsByPlanCode(String planCode);
+
 }

@@ -1,8 +1,11 @@
 package com.surya.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.surya.modal.SubscriptionPlan;
 import com.surya.payload.dto.SubscriptionPlanDTO;
 
+@Component
 public class SubscriptionPlanMapper {
 
     public SubscriptionPlanDTO toDTO(SubscriptionPlan plan) {
@@ -35,7 +38,7 @@ public class SubscriptionPlanMapper {
 
     }
 
-    public SubscriptionPlan toEntity(SubscriptionPlan dto) {
+    public SubscriptionPlan toEntity(SubscriptionPlanDTO dto) {
         if (dto == null) {
             return null;
         }
