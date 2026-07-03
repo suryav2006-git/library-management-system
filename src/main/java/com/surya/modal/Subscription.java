@@ -62,7 +62,7 @@ public class Subscription {
     @Builder.Default
     private Boolean isActive = true;
 
-    private Boolean autoReview;
+    private Boolean autoRenew;
 
     private LocalDateTime cancelledAt;
 
