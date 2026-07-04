@@ -18,7 +18,6 @@ import com.surya.payload.dto.SubscriptionDTO;
 import com.surya.payload.response.ApiResponse;
 import com.surya.services.SubscriptionService;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -30,7 +29,7 @@ public class SubscriptionController {
 
     @PostMapping("/subscribe")
     public ResponseEntity<?> subscribe(
-            @Valid @RequestBody SubscriptionDTO subscription) throws Exception {
+            @RequestBody SubscriptionDTO subscription) throws Exception {
         SubscriptionDTO dto = subscriptionService.subscribe(subscription);
         return ResponseEntity.ok(dto);
     }

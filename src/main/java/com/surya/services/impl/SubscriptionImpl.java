@@ -38,9 +38,9 @@ public class SubscriptionImpl implements SubscriptionService {
                 .findById(subscriptionDTO.getPlanId()).orElseThrow(
                         () -> new Exception("Plan Not Found!"));
 
-        Subscription subscription = subscriptionMapper.toEntity(subscriptionDTO);
+        Subscription subscription = subscriptionMapper.toEntity(subscriptionDTO, plan, user);
         subscription.initializeFromPlan();
-
+        subscription.setIsActive(false);
         // create payment( todo)
 
         Subscription saved = subscriptionRepository.save(subscription);

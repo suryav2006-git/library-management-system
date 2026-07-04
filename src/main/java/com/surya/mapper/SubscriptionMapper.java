@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.surya.exception.SubscriptionException;
 import com.surya.modal.Subscription;
+import com.surya.modal.SubscriptionPlan;
 import com.surya.modal.User;
 import com.surya.payload.dto.SubscriptionDTO;
 import com.surya.repository.SubscriptionPlanRepository;
@@ -66,36 +67,16 @@ public class SubscriptionMapper {
 
     }
 
-    public Subscription toEntity(SubscriptionDTO dto) throws SubscriptionException {
+    public Subscription toEntity(SubscriptionDTO dto, SubscriptionPlan plan, User user)
+            throws SubscriptionException {
         if (dto == null) {
             return null;
         }
 
         Subscription subscription = new Subscription();
         subscription.setId(dto.getId());
-
-        if (dto.getUserId() != null) {
-            User user = userRepository.findById(dto.getUserId())
-                    .orElseThrow(() -> new SubscriptionException(
-                            "User Not Found With Id : " + dto.getUserId()));
-            subscription.setUser(user);
-        }
-
-        subscription.setPlanName(dto.getPlanName());
-        subscription.setPlanCode(dto.getPlanCode());
-        subscription.setPrice(dto.getPrice());
-
-        subscription.setStartDate(dto.getStartDate());
-        subscription.setEndDate(dto.getEndDate());
-
-        subscription.setIsActive(dto.getIsActive() != null ? dto.getIsActive() : true);
-        subscription.setMaxBooksAllowed(dto.getMaxBooksAllowed());
-        subscription.setMaxDaysPerBook(dto.getMaxDaysPerBook());
-
-        subscription.setAutoRenew(dto.getAutoRenew() != null ? dto.getAutoRenew() : false);
-
-        subscription.setCancelledAt(dto.getCancelledAt());
-        subscription.setCancellationReason(dto.getCancellationReason());
+        subscription.setUser(user);
+        subscription.setPlan(plan);
         subscription.setNotes(dto.getNotes());
 
         return subscription;
