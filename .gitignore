@@ -1,49 +1,49 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+Backend/HELP.md
+Backend/target/
+Backend/.mvn/wrapper/maven-wrapper.jar
+Backend/!**/src/main/**/target/
+Backend/!**/src/test/**/target/
 
 ### Spring Boot Secret Files ###
-**/src/main/resources/application-local.properties
-**/src/main/resources/application-local.yml
-**/src/main/resources/application.properties.local
-.env
+Backend/**/src/main/resources/application-local.properties
+Backend/**/src/main/resources/application-local.yml
+Backend/**/src/main/resources/application.properties.local
+Backend/.env
 
 
 ### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+Backend/.apt_generated
+Backend/.classpath
+Backend/.factorypath
+Backend/.project
+Backend/.settings
+Backend/.springBeans
+Backend/.sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+Backend/.idea
+Backend/*.iws
+Backend/*.iml
+Backend/*.ipr
 
 ### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+Backend//nbproject/private/
+Backend//nbbuild/
+Backend//dist/
+Backend//nbdist/
+Backend//.nb-gradle/
+Backend/build/
+Backend/!**/src/main/**/build/
+Backend/!**/src/test/**/build/
 
 ### Launch Configurations ###
-.vscode/launch.json
-launch.json
+Backend/.vscode/launch.json
+Backend/launch.json
 
 
 ### VS Code ###
-.vscode/
-.env
+Backend/.vscode/
+Backend/.env
 
 #Local Codium ? Windsurf AI Configurations
-.codeiumignore
+Backend/.codeiumignore
