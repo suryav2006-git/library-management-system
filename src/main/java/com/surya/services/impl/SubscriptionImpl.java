@@ -79,7 +79,7 @@ public class SubscriptionImpl implements SubscriptionService {
     }
 
     @Override
-    public SubscriptionDTO activeSubscription(Long subscriptionId, Long paymentId) throws SubscriptionException {
+    public SubscriptionDTO activateSubscription(Long subscriptionId, Long paymentId) throws SubscriptionException {
 
         Subscription subscription = subscriptionRepository.findById(subscriptionId)
                 .orElseThrow(
@@ -102,7 +102,7 @@ public class SubscriptionImpl implements SubscriptionService {
     }
 
     @Override
-    public void deactivateExpiredSubscriptions(Long userId) throws Exception {
+    public void deactivateExpiredSubscriptions() throws Exception {
         List<Subscription> expiredSubscriptions = subscriptionRepository
                 .findExpiredActiveSubscription(LocalDate.now());
 
