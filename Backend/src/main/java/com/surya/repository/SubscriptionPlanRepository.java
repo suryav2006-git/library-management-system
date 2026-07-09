@@ -8,4 +8,6 @@ public interface SubscriptionPlanRepository extends JpaRepository<SubscriptionPl
 
     Boolean existsByPlanCode(String planCode);
 
+    SubscriptionPlan findByPlanCode(String planCode);
+
 }
