@@ -9,14 +9,18 @@ import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
 import com.surya.domain.PaymentType;
 import com.surya.modal.Payment;
+import com.surya.modal.SubscriptionPlan;
 import com.surya.modal.User;
 import com.surya.payload.response.PaymentLinkResponse;
+import com.surya.services.SubscriptionPlanService;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class RazorpayService {
+
+    private final SubscriptionPlanService subscriptionPlanService;
 
     @Value("${razorpay.key.id:}")
     private String razorpayKeyId;
@@ -89,6 +93,53 @@ public class RazorpayService {
 
         } catch (RazorpayException e) {
             throw new RuntimeException(e);
+        }
+
+    }
+
+    public JSONObject fetchPaymentDetails(String paymentId) throws Exception {
+
+        try {
+            RazorpayClient razorpay = new RazorpayClient(razorpayKeyId, razorpayKeySecret);
+            com.razorpay.Payment payment = razorpay.payments.fetch(paymentId);
+
+            return payment.toJson();
+        } catch (RazorpayException e) {
+            throw new Exception("Failed to fatch Payment Details : " + e.getMessage(), e);
+        }
+
+    }
+
+    public boolean isValidPayment(String paymentId) {
+
+        try {
+
+            JSONObject paymentDetails = fetchPaymentDetails(paymentId);
+
+            String status = paymentDetails.getString("status");
+            long amount = paymentDetails.getLong("amount");
+            long amountInRupees = amount / 100;
+
+            JSONObject notes = paymentDetails.getJSONObject("notes");
+            String paymentType = notes.getString("type");
+
+            if (!"captured".equalsIgnoreCase(status)) {
+                return false;
+            }
+
+            if (paymentType.equals(PaymentType.MEMBERSHIP.toString())) {
+                String planCode = notes.optString("plan");
+                SubscriptionPlan subscriptionPlan = subscriptionPlanService
+                        .getBySubscriptionPlanCode(planCode);
+
+                return amountInRupees == subscriptionPlan.getPrice();
+            } else if (paymentType.equals(PaymentType.FINE.toString())) {
+                Long fineId = notes.getLong("fine_id");
+                // todo
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
         }
 
     }

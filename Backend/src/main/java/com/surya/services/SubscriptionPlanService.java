@@ -2,6 +2,7 @@ package com.surya.services;
 
 import java.util.List;
 
+import com.surya.modal.SubscriptionPlan;
 import com.surya.payload.dto.SubscriptionPlanDTO;
 
 public interface SubscriptionPlanService {
@@ -13,5 +14,7 @@ public interface SubscriptionPlanService {
     void deleteSubscriptionPlan(Long planId) throws Exception;
 
     List<SubscriptionPlanDTO> getAllSubscriptionPlan();
+
+    SubscriptionPlan getBySubscriptionPlanCode(String subscriptionPlanCode) throws Exception;
 
 }

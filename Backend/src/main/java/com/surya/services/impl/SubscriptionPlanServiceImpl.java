@@ -22,6 +22,7 @@ public class SubscriptionPlanServiceImpl implements SubscriptionPlanService {
     private final SubscriptionPlanRepository planRepository;
     private final SubscriptionPlanMapper planMapper;
     private final UserService userService;
+    private final SubscriptionPlanRepository subscriptionPlanRepository;
 
     @Override
     public SubscriptionPlanDTO createSubscriptionPlan(SubscriptionPlanDTO planDTO) throws Exception {
@@ -71,6 +72,15 @@ public class SubscriptionPlanServiceImpl implements SubscriptionPlanService {
 
         return planList.stream().map(
                 planMapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public SubscriptionPlan getBySubscriptionPlanCode(String subscriptionPlanCode) throws Exception {
+        SubscriptionPlan plan = subscriptionPlanRepository.findByPlanCode(subscriptionPlanCode);
+        if (plan == null) {
+            throw new Exception("Subscription Plan Not Found");
+        }
+        return plan;
     }
 
 }
