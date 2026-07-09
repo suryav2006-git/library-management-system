@@ -24,7 +24,7 @@ public class PaymentInitiateRequest {
     private PaymentType paymentType;
 
     @NotNull(message = "Payment Gateway is Mandatory")
-    private PaymentGateway paymentGateway;
+    private PaymentGateway gateway;
 
     @NotNull(message = "Amount is Mandatory")
     @Positive(message = "Amount must be Positive")
