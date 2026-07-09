@@ -3,12 +3,14 @@ package com.surya.services.impl;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.json.JSONObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.surya.domain.PaymentGateway;
 import com.surya.domain.PaymentStatus;
+import com.surya.mapper.PaymentMapper;
 import com.surya.modal.Payment;
 import com.surya.modal.Subscription;
 import com.surya.modal.User;
@@ -33,6 +35,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final SubscriptionRepository subscriptionRepository;
     private final PaymentRepository paymentRepository;
     private final RazorpayService razorpayService;
+    private final PaymentMapper paymentMapper;
 
     @Override
     public PaymentInitiateResponse initiatePayment(PaymentInitiateRequest request) throws Exception {
@@ -87,13 +90,40 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentDTO verifyPayment(PaymentVerifyRequest req) {
-        return null;
+    public PaymentDTO verifyPayment(PaymentVerifyRequest req) throws Exception {
+
+        JSONObject paymentDetails = razorpayService.fetchPaymentDetails(
+                req.getRazorpayPaymentId());
+
+        JSONObject notes = paymentDetails.getJSONObject("notes");
+
+        Long paymentId = Long.parseLong(notes.optString("payment_id"));
+
+        Payment payment = paymentRepository.findById(paymentId).get();
+
+        boolean isValid = razorpayService.isValidPayment(req.getRazorpayPaymentId());
+
+        if (PaymentGateway.RAZORPAY == payment.getGateway()) {
+            if (isValid) {
+                payment.setGatewayOrderId(req.getRazorpayPaymentId());
+            }
+        }
+        if (isValid) {
+            payment.setStatus(PaymentStatus.SUCCESS);
+            payment.setCompletedAt(LocalDateTime.now());
+            payment = paymentRepository.save(payment);
+
+            // publish payment success event todo
+        }
+
+        return paymentMapper.toDTO(payment);
     }
 
     @Override
     public Page<PaymentDTO> getAllPayments(Pageable pageable) {
-        return null;
+        Page<Payment> payments = paymentRepository.findAll(pageable);
+
+        return payments.map(paymentMapper::toDTO);
     }
 
 }
