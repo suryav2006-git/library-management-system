@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.surya.domain.PaymentGateway;
 import com.surya.domain.PaymentStatus;
 import com.surya.modal.Payment;
 import com.surya.modal.Subscription;
@@ -15,10 +16,12 @@ import com.surya.payload.dto.PaymentDTO;
 import com.surya.payload.request.PaymentInitiateRequest;
 import com.surya.payload.request.PaymentVerifyRequest;
 import com.surya.payload.response.PaymentInitiateResponse;
+import com.surya.payload.response.PaymentLinkResponse;
 import com.surya.repository.PaymentRepository;
 import com.surya.repository.SubscriptionRepository;
 import com.surya.repository.UserRepository;
 import com.surya.services.PaymentService;
+import com.surya.services.gateway.RazorpayService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,6 +32,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final UserRepository userRepository;
     private final SubscriptionRepository subscriptionRepository;
     private final PaymentRepository paymentRepository;
+    private final RazorpayService razorpayService;
 
     @Override
     public PaymentInitiateResponse initiatePayment(PaymentInitiateRequest request) throws Exception {
@@ -39,7 +43,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         payment.setUser(user);
         payment.setPaymentType(request.getPaymentType());
-        payment.setGateway(request.getPaymentGateway());
+        payment.setGateway(request.getGateway());
         payment.setAmount(request.getAmount());
         payment.setDescription(request.getDescription());
         payment.setStatus(PaymentStatus.PENDING);
@@ -55,8 +59,31 @@ public class PaymentServiceImpl implements PaymentService {
 
         }
         payment = paymentRepository.save(payment);
+        PaymentInitiateResponse response = new PaymentInitiateResponse();
 
-        return null;
+        if (request.getGateway() == PaymentGateway.RAZORPAY) {
+            PaymentLinkResponse paymentLinkResponse = razorpayService.createPaymentLink(
+                    user, payment);
+            response = PaymentInitiateResponse.builder()
+                    .paymentId(payment.getId())
+                    .gateway(payment.getGateway())
+                    .checkoutUrl(paymentLinkResponse.getPayment_link_url())
+                    .transactionId(paymentLinkResponse.getPayment_link_id())
+                    .amount(payment.getAmount())
+                    .description(payment.getDescription())
+                    .success(true)
+                    .message("Payment Initiated Successfully")
+                    .build();
+
+            payment.setGatewayOrderId(paymentLinkResponse.getPayment_link_id());
+        }
+
+        payment.setStatus(PaymentStatus.PROCESSING);
+        paymentRepository.save(payment);
+
+        // payment initiate event
+
+        return response;
     }
 
     @Override
