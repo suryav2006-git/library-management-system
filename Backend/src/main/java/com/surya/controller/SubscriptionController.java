@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.surya.exception.SubscriptionException;
 import com.surya.payload.dto.SubscriptionDTO;
 import com.surya.payload.response.ApiResponse;
+import com.surya.payload.response.PaymentInitiateResponse;
 import com.surya.services.SubscriptionService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class SubscriptionController {
     @PostMapping("/subscribe")
     public ResponseEntity<?> subscribe(
             @RequestBody SubscriptionDTO subscription) throws Exception {
-        SubscriptionDTO dto = subscriptionService.subscribe(subscription);
+        PaymentInitiateResponse dto = subscriptionService.subscribe(subscription);
         return ResponseEntity.ok(dto);
     }
 

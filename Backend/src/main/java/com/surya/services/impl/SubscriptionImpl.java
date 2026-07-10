@@ -7,14 +7,19 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.surya.domain.PaymentGateway;
+import com.surya.domain.PaymentType;
 import com.surya.exception.SubscriptionException;
 import com.surya.mapper.SubscriptionMapper;
 import com.surya.modal.Subscription;
 import com.surya.modal.SubscriptionPlan;
 import com.surya.modal.User;
 import com.surya.payload.dto.SubscriptionDTO;
+import com.surya.payload.request.PaymentInitiateRequest;
+import com.surya.payload.response.PaymentInitiateResponse;
 import com.surya.repository.SubscriptionPlanRepository;
 import com.surya.repository.SubscriptionRepository;
+import com.surya.services.PaymentService;
 import com.surya.services.SubscriptionService;
 import com.surya.services.UserService;
 
@@ -28,9 +33,10 @@ public class SubscriptionImpl implements SubscriptionService {
     private final SubscriptionMapper subscriptionMapper;
     private final UserService userService;
     private final SubscriptionPlanRepository subscriptionPlanRepository;
+    private final PaymentService paymentService;
 
     @Override
-    public SubscriptionDTO subscribe(SubscriptionDTO subscriptionDTO) throws Exception {
+    public PaymentInitiateResponse subscribe(SubscriptionDTO subscriptionDTO) throws Exception {
 
         User user = userService.getCurrentUser();
 
@@ -41,11 +47,20 @@ public class SubscriptionImpl implements SubscriptionService {
         Subscription subscription = subscriptionMapper.toEntity(subscriptionDTO, plan, user);
         subscription.initializeFromPlan();
         subscription.setIsActive(false);
+        Subscription savedSubscription = subscriptionRepository.save(subscription);
+
         // create payment( todo)
 
-        Subscription saved = subscriptionRepository.save(subscription);
+        PaymentInitiateRequest paymentInitiateRequest = PaymentInitiateRequest.builder()
+                .userId(user.getId())
+                .subscriptionId(subscription.getId())
+                .paymentType(PaymentType.MEMBERSHIP)
+                .gateway(PaymentGateway.RAZORPAY)
+                .amount(subscription.getPrice())
+                .description("Library Subscription - " + plan.getName())
+                .build();
 
-        return subscriptionMapper.toDTO(saved);
+        return paymentService.initiatePayment(paymentInitiateRequest);
     }
 
     @Override
