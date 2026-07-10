@@ -6,10 +6,11 @@ import org.springframework.data.domain.Pageable;
 
 import com.surya.exception.SubscriptionException;
 import com.surya.payload.dto.SubscriptionDTO;
+import com.surya.payload.response.PaymentInitiateResponse;
 
 public interface SubscriptionService {
 
-    SubscriptionDTO subscribe(SubscriptionDTO subscriptionDTO) throws Exception;
+    PaymentInitiateResponse subscribe(SubscriptionDTO subscriptionDTO) throws Exception;
 
     SubscriptionDTO getUsersActiveSubscription(Long userId) throws Exception;
 

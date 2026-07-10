@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.surya.domain.PaymentGateway;
 import com.surya.domain.PaymentStatus;
+import com.surya.event.publisher.PaymentEventPublisher;
 import com.surya.mapper.PaymentMapper;
 import com.surya.modal.Payment;
 import com.surya.modal.Subscription;
@@ -36,6 +37,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final RazorpayService razorpayService;
     private final PaymentMapper paymentMapper;
+    private final PaymentEventPublisher paymentEventPublisher;
 
     @Override
     public PaymentInitiateResponse initiatePayment(PaymentInitiateRequest request) throws Exception {
@@ -113,7 +115,7 @@ public class PaymentServiceImpl implements PaymentService {
             payment.setCompletedAt(LocalDateTime.now());
             payment = paymentRepository.save(payment);
 
-            // publish payment success event todo
+            paymentEventPublisher.publishPaymentSuccessEvent(payment);
         }
 
         return paymentMapper.toDTO(payment);
