@@ -56,7 +56,7 @@ git clone https://github.com/suryav2006-git/library-management-system.git
 mvn clean install
 
 # 3. Boot up the Spring Boot application
-mvn spring-boot:run or ./mvnw spring-boot:run
+mvn spring-boot:run
 ```
 *Note: Make sure your target database server is active and running locally before booting up the application.*
 
@@ -68,13 +68,22 @@ Thank you for checking out my Production-Grade Library Management System! This p
 
 If you are a tech recruiter, an open-source contributor, or a fellow software engineering student, I would love to connect with you!
 
-<p align="left"><a href="mailto:mrstudieshelper@gmail.com"><img src="https://shields.io" alt="Email Me"/></a> <a href="https://www.linkedin.com/in/suryav2006-lin"><img src="https://shields.io" alt="LinkedIn"/></a> <a href="https://leetcode.com/u/suryav2006-lee/"><img src="https://shields.io" alt="LeetCode"/></a></p>
+<p align="left">
+  <a href="mailto:mrstudieshelper@gmail.com"><img src="https://shields.io" alt="Email Me"/></a> 
+  <a href="https://www.linkedin.com/in/suryav2006-lin"><img src="https://shields.io" alt="LinkedIn"/></a> 
+  <a href="https://leetcode.com/u/suryav2006-lee/"><img src="https://shields.io" alt="LeetCode"/></a>
+</p>
 
+---
 
+## 🎓 Acknowledgements & Credits
 
-### 📄 License
+While every line of this codebase was written, typed, and debugged by hand to master these architectural patterns, the foundational design, database schema concepts, and full-stack integration strategies were inspired by the tutorials on the **[Code With Zosh YouTube Channel](https://youtube.com/@codewithzosh)**.
+
+---
+
+## 📄 License
 This repository is open-source and licensed under the **MIT License**. Feel free to fork it, explore the code optimization frameworks, or adapt the database schemas for your own workflows.
 
 ***
 *“Even if the world loses its value, I won’t lose mine.” — Built with discipline and daily momentum by Surya V.*
-
