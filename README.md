@@ -68,7 +68,7 @@ Thank you for checking out my Production-Grade Library Management System! This p
 
 If you are a tech recruiter, an open-source contributor, or a fellow software engineering student, I would love to connect with you!
 
-<p align="left"><a href="mailto:mrstudieshelper@gmail.com"><img src="https://shields.io" alt="Email Me"/></a> <a href="https://linkedin.com"><img src="https://shields.io" alt="LinkedIn"/></a> <a href="https://leetcode.com"><img src="https://shields.io" alt="LeetCode"/></a></p>
+<p align="left"><a href="mailto:mrstudieshelper@gmail.com"><img src="https://shields.io" alt="Email Me"/></a> <a href="https://www.linkedin.com/in/suryav2006-lin"><img src="https://shields.io" alt="LinkedIn"/></a> <a href="https://leetcode.com/u/suryav2006-lee/"><img src="https://shields.io" alt="LeetCode"/></a></p>
 
 
 
