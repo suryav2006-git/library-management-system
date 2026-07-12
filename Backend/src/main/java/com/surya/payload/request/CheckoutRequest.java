@@ -15,7 +15,7 @@ public class CheckoutRequest {
     private Long bookId;
 
     @Min(value = 1, message = "Checkout Days must be Atleast 1")
-    private Integer checkoutDate = 14;
+    private Integer checkoutDays = 14;
 
     private String notes;
 
