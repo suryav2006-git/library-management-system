@@ -4,6 +4,13 @@ import java.time.LocalDate;
 
 import com.surya.domain.BookLoanStatus;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookLoanSearchRequest {
 
     private Long userId;
