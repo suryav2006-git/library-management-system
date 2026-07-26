@@ -189,9 +189,38 @@ public class BookLoanServiceImpl implements BookLoanService {
     }
 
     @Override
-    public PageResponse<BookLoanDTO> getBookLoans(BookLoanSearchRequest request) throws Exception {
+    public PageResponse<BookLoanDTO> getBookLoans(BookLoanSearchRequest searchRequest) throws Exception {
 
-        return null;
+        Pageable pageable = createPageable(
+                searchRequest.getPage(),
+                searchRequest.getSize(),
+                searchRequest.getSortBy(),
+                searchRequest.getSortDirection());
+
+        Page<BookLoan> bookLoanPage;
+
+        if (Boolean.TRUE.equals(searchRequest.getOverdueOnly())) {
+            bookLoanPage = bookLoanRepository.findOverdueBookLoans(LocalDate.now(), pageable);
+        }
+
+        else if (searchRequest.getUserId() != null) {
+            bookLoanPage = bookLoanRepository.findByUserId(searchRequest.getUserId(), pageable);
+        }
+
+        else if (searchRequest.getBookId() != null) {
+            bookLoanPage = bookLoanRepository.findByBookId(searchRequest.getBookId(), pageable);
+        } else if (searchRequest.getStatus() != null) {
+            bookLoanPage = bookLoanRepository.findByStatus(searchRequest.getStatus(), pageable);
+        } else if (searchRequest.getStartDate() != null && searchRequest.getEndDate() != null) {
+            bookLoanPage = bookLoanRepository.findBookLoansByDateRange(
+                    searchRequest.getStartDate(),
+                    searchRequest.getEndDate(),
+                    pageable);
+        } else {
+            bookLoanPage = bookLoanRepository.findAll(pageable);
+        }
+
+        return convertToPageResponse(bookLoanPage);
     }
 
     @Override
