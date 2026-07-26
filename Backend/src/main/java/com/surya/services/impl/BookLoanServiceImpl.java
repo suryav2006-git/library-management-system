@@ -37,9 +37,11 @@ public class BookLoanServiceImpl implements BookLoanService {
     private final BookLoanMapper bookLoanMapper;
 
     @Override
-    public BookLoanDTO checkoutBook(CheckoutRequest checkoutRequest) {
+    public BookLoanDTO checkoutBook(CheckoutRequest checkoutRequest) throws Exception {
 
-        return null;
+        User user = userService.getCurrentUser();
+
+        return checkoutBookForUser(user.getId(), checkoutRequest);
     }
 
     @Override
@@ -100,8 +102,44 @@ public class BookLoanServiceImpl implements BookLoanService {
     }
 
     @Override
-    public BookLoanDTO checkinBook(CheckinRequest checkinRequest, String bookId) {
-        return null;
+    public BookLoanDTO checkinBook(CheckinRequest checkinRequest, String bookId) throws Exception {
+
+        BookLoan bookLoan = bookLoanRepository.findById(checkinRequest.getBookLoanId())
+                .orElseThrow(
+                        () -> new Exception("Bookloan Not Found"));
+        if (!bookLoan.isActive()) {
+            throw new Exception("Book Loan is NOT Active");
+        }
+
+        bookLoan.setReturnDate(LocalDate.now());
+
+        BookLoanStatus condition = checkinRequest.getCondition();
+
+        if (condition == null) {
+            condition = BookLoanStatus.RETURNED;
+        }
+
+        bookLoan.setStatus(condition);
+
+        // todo Fine
+
+        bookLoan.setOverdueDays(0);
+        bookLoan.setIsOverdue(false);
+
+        bookLoan.setNotes("Book Returned By User");
+
+        if (condition != BookLoanStatus.LOST) {
+            Book book = bookLoan.getBook();
+            book.setAvailableCopies(book.getAvailableCopies() + 1);
+            bookRepository.save(book);
+
+            // todo process next reservation
+
+        }
+
+        BookLoan savedBookLoan = bookLoanRepository.save(bookLoan);
+
+        return bookLoanMapper.toDTO(savedBookLoan);
     }
 
     @Override
