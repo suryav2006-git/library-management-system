@@ -1,6 +1,7 @@
 package com.surya.services.impl;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -225,7 +226,26 @@ public class BookLoanServiceImpl implements BookLoanService {
 
     @Override
     public int updateOverdueBookLoan() {
-        return 0;
+
+        Pageable pageable = PageRequest.of(0, 1000);
+        Page<BookLoan> overduePage = bookLoanRepository.findOverdueBookLoans(LocalDate.now(), pageable);
+
+        int updateCount = 0;
+
+        for (BookLoan bookLoan : overduePage.getContent()) {
+            if (bookLoan.getStatus() == BookLoanStatus.CHECKED_OUT) {
+                bookLoan.setStatus(BookLoanStatus.OVERDUE);
+                bookLoan.setIsOverdue(true);
+
+                int overdueDays = calculateOverDueDate(bookLoan.getDueDate(), LocalDate.now());
+
+                // todo Calculate Fine
+
+                bookLoanRepository.save(bookLoan);
+                updateCount++;
+            }
+        }
+        return updateCount;
     }
 
     private Pageable createPageable(int page, int size, String sortBy, String sortDirection) {
@@ -255,6 +275,14 @@ public class BookLoanServiceImpl implements BookLoanService {
                 bookLoanPage.isFirst(),
                 bookLoanPage.isEmpty());
 
+    }
+
+    public int calculateOverDueDate(LocalDate dueDate, LocalDate today) {
+        if (today.isBefore(dueDate) || today.isEqual(dueDate)) {
+            return 0;
+        }
+
+        return (int) ChronoUnit.DAYS.between(dueDate, today);
     }
 
 }
