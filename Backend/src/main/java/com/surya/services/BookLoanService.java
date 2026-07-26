@@ -10,11 +10,11 @@ import com.surya.payload.response.PageResponse;
 
 public interface BookLoanService {
 
-        BookLoanDTO checkoutBook(CheckoutRequest checkoutRequest);
+        BookLoanDTO checkoutBook(CheckoutRequest checkoutRequest) throws Exception;
 
         BookLoanDTO checkoutBookForUser(Long userId, CheckoutRequest checkoutRequest) throws Exception;
 
-        BookLoanDTO checkinBook(CheckinRequest checkinRequest, String bookId);
+        BookLoanDTO checkinBook(CheckinRequest checkinRequest, String bookId) throws Exception;
 
         BookLoanDTO renewCheckout(RenewalRequest renewalRequest);
 
