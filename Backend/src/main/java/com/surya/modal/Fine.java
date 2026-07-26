@@ -42,7 +42,7 @@ public class Fine {
     @JoinColumn(nullable = false)
     private BookLoan bookLoan;
 
-    private FineType fine;
+    private FineType type;
 
     @Column(nullable = false)
     private Long amount;
