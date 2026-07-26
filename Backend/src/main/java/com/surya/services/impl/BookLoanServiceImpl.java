@@ -109,7 +109,7 @@ public class BookLoanServiceImpl implements BookLoanService {
     }
 
     @Override
-    public BookLoanDTO checkinBook(CheckinRequest checkinRequest, String bookId) throws Exception {
+    public BookLoanDTO checkinBook(CheckinRequest checkinRequest) throws Exception {
 
         BookLoan bookLoan = bookLoanRepository.findById(checkinRequest.getBookLoanId())
                 .orElseThrow(

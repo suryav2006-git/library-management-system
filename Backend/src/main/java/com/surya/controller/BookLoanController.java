@@ -50,7 +50,7 @@ public class BookLoanController {
         return new ResponseEntity<>(bookLoan, HttpStatus.CREATED);
     }
 
-    @PostMapping("/checkin/")
+    @PostMapping("/checkin")
     public ResponseEntity<?> checkin(
             @Valid @RequestBody CheckinRequest checkinRequest) throws Exception {
         BookLoanDTO bookLoan = bookLoanService.checkinBook(checkinRequest);
