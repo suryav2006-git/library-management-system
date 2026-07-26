@@ -14,7 +14,7 @@ public interface BookLoanService {
 
         BookLoanDTO checkoutBookForUser(Long userId, CheckoutRequest checkoutRequest) throws Exception;
 
-        BookLoanDTO checkinBook(CheckinRequest checkinRequest, String bookId) throws Exception;
+        BookLoanDTO checkinBook(CheckinRequest checkinRequest) throws Exception;
 
         BookLoanDTO renewCheckout(RenewalRequest renewalRequest) throws Exception;
 
