@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.surya.domain.BookLoanStatus;
 import com.surya.modal.BookLoan;
+import com.surya.modal.User;
 
 public interface BookLoanRepository extends JpaRepository<BookLoan, Long> {
 
@@ -15,7 +16,7 @@ public interface BookLoanRepository extends JpaRepository<BookLoan, Long> {
 
         Page<BookLoan> findByUserId(Long userId, Pageable pageable);
 
-        Page<BookLoan> findByUserIdAndStatus(Long userId, BookLoanStatus status, Pageable pageable);
+        Page<BookLoan> findByStatusAndUser(BookLoanStatus status, User user, Pageable pageable);
 
         @Query(" select case when count(bl) > 0 then true else false end from BookLoan bl " +
                         " where bl.user.id = :userId and bl.book.id=:bookId " +
