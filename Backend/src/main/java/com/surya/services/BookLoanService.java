@@ -16,7 +16,7 @@ public interface BookLoanService {
 
         BookLoanDTO checkinBook(CheckinRequest checkinRequest, String bookId) throws Exception;
 
-        BookLoanDTO renewCheckout(RenewalRequest renewalRequest);
+        BookLoanDTO renewCheckout(RenewalRequest renewalRequest) throws Exception;
 
         PageResponse<BookLoanDTO> getMyBookLoans(
                         BookLoanStatus status, int page, int size);
