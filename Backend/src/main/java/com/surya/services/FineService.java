@@ -14,13 +14,13 @@ public interface FineService {
 
     FineDTO createFine(CreateFineRequest createFineRequest);
 
-    PaymentInitiateResponse payFine(Long fineId, String transactionId);
+    PaymentInitiateResponse payFine(Long fineId, String transactionId) throws Exception;
 
-    void markFineAsPaid(Long fineId, Long amount, String transactionId);
+    void markFineAsPaid(Long fineId, Long amount, String transactionId) throws Exception;
 
-    FineDTO waiveFine(WaiveFineRequest waiveFineRequest);
+    FineDTO waiveFine(WaiveFineRequest waiveFineRequest) throws Exception;
 
-    List<FineDTO> getMyFines(FineStatus status, FineType type);
+    List<FineDTO> getMyFines(FineStatus status, FineType type) throws Exception;
 
     PageResponse<FineDTO> getAllFines(
             FineStatus status,

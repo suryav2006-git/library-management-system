@@ -21,7 +21,7 @@ public class FineDTO {
     private Long id;
 
     @NotNull(message = "Book Loan ID is Mandatory")
-    private Long bookId;
+    private Long bookLoanId;
 
     private String bookTitle;
 
@@ -30,7 +30,7 @@ public class FineDTO {
     @NotNull(message = "User ID is Mandatory")
     private Long userId;
 
-    private String name;
+    private String userName;
 
     private String userEmail;
 
@@ -53,7 +53,9 @@ public class FineDTO {
 
     private String notes;
 
-    private Long waivedByUserName;
+    private Long waivedByUserId;
+
+    private String waivedByUserName;
 
     private LocalDateTime waivedAt;
 
