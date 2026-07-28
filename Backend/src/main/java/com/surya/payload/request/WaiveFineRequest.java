@@ -17,6 +17,6 @@ public class WaiveFineRequest {
     private Long fineId;
 
     @NotBlank(message = "Waiver Reason Is Mandatory")
-    private String message;
+    private String reason;
 
 }
