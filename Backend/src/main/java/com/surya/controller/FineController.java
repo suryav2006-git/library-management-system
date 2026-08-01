@@ -46,7 +46,7 @@ public class FineController {
         return ResponseEntity.ok(res);
     }
 
-    @PostMapping
+    @PostMapping("/waive")
     public ResponseEntity<?> waiveFine(
             @Valid @RequestBody WaiveFineRequest waiveFineRequest) throws Exception {
         FineDTO fineDTO = fineService.waiveFine(waiveFineRequest);

@@ -22,7 +22,7 @@ public interface FineRepository extends JpaRepository<Fine, Long> {
                         ORDER BY f.createdAt DESC
                         """)
         Page<Fine> findAllWithFilters(
-                        @Param("userid") Long userId,
+                        @Param("userId") Long userId,
                         @Param("status") FineStatus status,
                         @Param("type") FineType type,
                         Pageable pageable);
