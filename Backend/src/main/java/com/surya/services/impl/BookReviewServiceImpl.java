@@ -1,15 +1,25 @@
 package com.surya.services.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.surya.domain.BookLoanStatus;
 import com.surya.mapper.BookReviewMapper;
 import com.surya.modal.Book;
+import com.surya.modal.BookLoan;
 import com.surya.modal.BookReview;
 import com.surya.modal.User;
 import com.surya.payload.dto.BookReviewDTO;
 import com.surya.payload.request.CreateReviewRequest;
 import com.surya.payload.request.UpdateReviewRequest;
 import com.surya.payload.response.PageResponse;
+import com.surya.repository.BookLoanRepository;
 import com.surya.repository.BookRepository;
 import com.surya.repository.BookReviewRepository;
 import com.surya.services.BookReviewService;
@@ -25,6 +35,7 @@ public class BookReviewServiceImpl implements BookReviewService {
     private final UserService userService;
     private final BookRepository bookRepository;
     private final BookReviewMapper bookReviewMapper;
+    private final BookLoanRepository bookLoanRepository;
 
     @Override
     public BookReviewDTO createReview(CreateReviewRequest request) throws Exception {
@@ -92,13 +103,45 @@ public class BookReviewServiceImpl implements BookReviewService {
     }
 
     @Override
-    public PageResponse<BookReviewDTO> getReviewsByBook(Long id, int page, int size) {
-        return null;
+    public PageResponse<BookReviewDTO> getReviewsByBook(Long id, int page, int size) throws Exception {
+
+        Book book = bookRepository.findById(id).orElseThrow(
+                () -> new Exception("Book Not Found With ID"));
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+
+        Page<BookReview> reviewPage = bookReviewRepository.findByBook(book, pageable);
+
+        return convertToPageResponse(reviewPage);
     }
 
     // Helper Method
-    private boolean hasUserReadBook(Long id, Long id1) {
-        return false;
+    private PageResponse<BookReviewDTO> convertToPageResponse(Page<BookReview> reviewPage) {
+
+        List<BookReviewDTO> reviewDTOs = reviewPage.getContent()
+                .stream()
+                .map(bookReviewMapper::toDTO)
+                .collect(Collectors.toList());
+
+        return new PageResponse<>(
+                reviewDTOs,
+                reviewPage.getNumber(),
+                reviewPage.getSize(),
+                reviewPage.getTotalElements(),
+                reviewPage.getTotalPages(),
+                reviewPage.isLast(),
+                reviewPage.isFirst(),
+                reviewPage.isEmpty());
+    }
+
+    // Helper Method
+    private boolean hasUserReadBook(Long userId, Long bookId) {
+
+        List<BookLoan> bookLoans = bookLoanRepository.findByBookId(bookId);
+
+        return bookLoans.stream()
+                .anyMatch(loan -> loan.getUser().getId().equals(userId) &&
+                        loan.getStatus() == BookLoanStatus.RETURNED);
     }
 
 }

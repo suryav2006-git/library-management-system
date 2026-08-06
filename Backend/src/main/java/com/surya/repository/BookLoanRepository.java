@@ -1,6 +1,7 @@
 package com.surya.repository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,8 @@ public interface BookLoanRepository extends JpaRepository<BookLoan, Long> {
         Page<BookLoan> findByStatusAndUser(BookLoanStatus status, User user, Pageable pageable);
 
         Page<BookLoan> findByBookId(Long bookId, Pageable pageable);
+
+        List<BookLoan> findByBookId(Long bookId);
 
         @Query(" select case when count(bl) > 0 then true else false end from BookLoan bl " +
                         " where bl.user.id = :userId and bl.book.id=:bookId " +
