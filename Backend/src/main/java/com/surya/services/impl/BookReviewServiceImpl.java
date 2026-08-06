@@ -95,7 +95,7 @@ public class BookReviewServiceImpl implements BookReviewService {
     public void deleteReview(Long reviewId) throws Exception {
         User currentUser = userService.getCurrentUser();
 
-        BookReview bookReview = bookReviewRepository.findById(currentUser.getId())
+        BookReview bookReview = bookReviewRepository.findById(reviewId)
                 .orElseThrow(
                         () -> new Exception("Review Not Found With This ID : " + reviewId));
 
