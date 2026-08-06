@@ -81,8 +81,14 @@ public class BookReviewServiceImpl implements BookReviewService {
     }
 
     @Override
-    public void deleteReview(Long reviewId) {
+    public void deleteReview(Long reviewId) throws Exception {
+        User currentUser = userService.getCurrentUser();
 
+        BookReview bookReview = bookReviewRepository.findById(currentUser.getId())
+                .orElseThrow(
+                        () -> new Exception("Review Not Found With This ID : " + reviewId));
+
+        bookReviewRepository.delete(bookReview);
     }
 
     @Override
