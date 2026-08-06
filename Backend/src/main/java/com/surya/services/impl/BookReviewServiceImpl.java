@@ -59,8 +59,25 @@ public class BookReviewServiceImpl implements BookReviewService {
     }
 
     @Override
-    public BookReviewDTO updateReview(Long reviewId, UpdateReviewRequest request) {
-        return null;
+    public BookReviewDTO updateReview(Long reviewId, UpdateReviewRequest request) throws Exception {
+
+        User user = userService.getCurrentUser();
+
+        BookReview bookReview = bookReviewRepository.findById(reviewId)
+                .orElseThrow(
+                        () -> new Exception("Review Not Found"));
+
+        if (!bookReview.getUser().getId().equals(user.getId())) {
+            throw new Exception("You Have Not Reviewed This Book");
+        }
+
+        bookReview.setReviewText(request.getReviewText());
+        bookReview.setTitle(request.getTitle());
+        bookReview.setRating(request.getRating());
+
+        BookReview savedBookReview = bookReviewRepository.save(bookReview);
+
+        return bookReviewMapper.toDTO(savedBookReview);
     }
 
     @Override
