@@ -7,7 +7,7 @@ import com.surya.payload.response.PageResponse;
 
 public interface ReservationService {
 
-    ReservationDTO createReservation(ReservationRequest reservationRequest);
+    ReservationDTO createReservation(ReservationRequest reservationRequest) throws Exception;
 
     ReservationDTO createReservationForUser(
             ReservationRequest reservationRequest, Long userId) throws Exception;
@@ -16,7 +16,7 @@ public interface ReservationService {
 
     ReservationDTO fulfillReservation(Long reservationId) throws Exception;
 
-    PageResponse<ReservationDTO> getMyReservations(ReservationSearchRequest searchRequest);
+    PageResponse<ReservationDTO> getMyReservations(ReservationSearchRequest searchRequest) throws Exception;
 
     PageResponse<ReservationDTO> searchReservations(ReservationSearchRequest searchRequest);
 

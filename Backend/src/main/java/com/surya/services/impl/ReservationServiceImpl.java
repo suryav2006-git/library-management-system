@@ -44,8 +44,9 @@ public class ReservationServiceImpl implements ReservationService {
     int MAX_RESERVATION = 5;
 
     @Override
-    public ReservationDTO createReservation(ReservationRequest reservationRequest) {
-        return null;
+    public ReservationDTO createReservation(ReservationRequest reservationRequest) throws Exception {
+        User user = userService.getCurrentUser();
+        return createReservationForUser(reservationRequest, user.getId());
     }
 
     @Override
@@ -152,8 +153,13 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public PageResponse<ReservationDTO> getMyReservations(ReservationSearchRequest searchRequest) {
-        return null;
+    public PageResponse<ReservationDTO> getMyReservations(ReservationSearchRequest searchRequest) throws Exception {
+
+        User user = userService.getCurrentUser();
+
+        searchRequest.setUserId(user.getId());
+
+        return searchReservations(searchRequest);
     }
 
     @Override
