@@ -56,7 +56,7 @@ git clone https://github.com/suryav2006-git/library-management-system.git
 mvn clean install
 
 # 3. Boot up the Spring Boot application
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 *Note: Make sure your target database server is active and running locally before booting up the application.*
 
