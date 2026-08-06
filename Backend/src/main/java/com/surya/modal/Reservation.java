@@ -67,4 +67,15 @@ public class Reservation {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    public boolean canBeCancelled() {
+        return status == ReservationStatus.PENDING || status == ReservationStatus.AVAILABLE;
+    }
+
+    public boolean hasExpired() {
+
+        return status == ReservationStatus.AVAILABLE
+                && availableUntil != null
+                && LocalDateTime.now().isAfter(availableUntil);
+    }
+
 }
