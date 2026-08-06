@@ -7,7 +7,7 @@ import com.surya.payload.response.PageResponse;
 
 public interface BookReviewService {
 
-    BookReviewDTO createReview(CreateReviewRequest request);
+    BookReviewDTO createReview(CreateReviewRequest request) throws Exception;
 
     BookReviewDTO updateReview(Long reviewId, UpdateReviewRequest request);
 
