@@ -9,7 +9,15 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class BookReviewDTO {
 
     private Long id;
@@ -35,12 +43,6 @@ public class BookReviewDTO {
 
     @Size(max = 2000, message = "Review Text Must Not Exceed 200 Characters")
     private String title;
-
-    private Boolean isVerifiedReader;
-
-    private Boolean isActive;
-
-    private Integer helpfulCount;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
