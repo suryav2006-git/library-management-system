@@ -1,5 +1,23 @@
 package com.surya.services;
 
-public class ReservationService {
+import com.surya.payload.dto.ReservationDTO;
+import com.surya.payload.request.ReservationRequest;
+import com.surya.payload.request.ReservationSearchRequest;
+import com.surya.payload.response.PageResponse;
+
+public interface ReservationService {
+
+    ReservationDTO createReservation(ReservationRequest reservationRequest);
+
+    ReservationDTO createReservationForUser(
+            ReservationRequest reservationRequest, Long userId) throws Exception;
+
+    ReservationDTO cancelReservation(Long reservationId);
+
+    ReservationDTO fulfillReservation(Long reservationId);
+
+    PageResponse<ReservationDTO> getMyReservations(ReservationSearchRequest searchRequest);
+
+    PageResponse<ReservationDTO> searchReservations(ReservationSearchRequest searchRequest);
 
 }
