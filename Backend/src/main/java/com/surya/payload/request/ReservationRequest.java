@@ -17,11 +17,4 @@ public class ReservationRequest {
 
     private String notes;
 
-    public boolean hasActiveReservation(Long userId, Long id) {
-        throw new UnsupportedOperationException("Unimplemented method 'hasActiveReservation'");
-    }
-
-    // List<Reservation> findPendingReservationsByBook(@Param("bookId") Long
-    // bookId);
-
 }

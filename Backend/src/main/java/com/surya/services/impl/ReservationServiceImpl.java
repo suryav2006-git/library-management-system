@@ -66,7 +66,7 @@ public class ReservationServiceImpl implements ReservationService {
                 .orElseThrow(
                         () -> new Exception("Book Not Found"));
 
-        if (reservationRequest.hasActiveReservation(userId, book.getId())) {
+        if (reservationRepository.hasActiveReservation(userId, book.getId())) {
             throw new Exception("You Already Have A Reservation on This Book");
         }
 

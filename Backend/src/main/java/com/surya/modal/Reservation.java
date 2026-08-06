@@ -9,6 +9,8 @@ import com.surya.domain.ReservationStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,6 +38,7 @@ public class Reservation {
     private Book book;
 
     @Builder.Default
+    @Enumerated(EnumType.STRING)
     private ReservationStatus status = ReservationStatus.PENDING;
 
     private LocalDateTime reservedAt;

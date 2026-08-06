@@ -81,6 +81,7 @@ public class ReservationController {
         return ResponseEntity.ok(reservations);
     }
 
+    @GetMapping
     public ResponseEntity<PageResponse<ReservationDTO>> searchReservations(
             @RequestParam(required = false) Long userId,
             @RequestParam(required = false) Long bookId,
