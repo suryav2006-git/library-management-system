@@ -33,6 +33,9 @@ public class BookReviewDTO {
     @Size(min = 10, max = 2000, message = "Review must be Between 10 and 2000 Chracters")
     private String reviewText;
 
+    @Size(max = 2000, message = "Review Text Must Not Exceed 200 Characters")
+    private String title;
+
     private Boolean isVerifiedReader;
 
     private Boolean isActive;
