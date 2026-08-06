@@ -1,7 +1,12 @@
 package com.surya.services.impl;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.surya.domain.BookLoanStatus;
@@ -12,12 +17,14 @@ import com.surya.modal.Book;
 import com.surya.modal.Reservation;
 import com.surya.modal.User;
 import com.surya.payload.dto.ReservationDTO;
+import com.surya.payload.request.CheckoutRequest;
 import com.surya.payload.request.ReservationRequest;
 import com.surya.payload.request.ReservationSearchRequest;
 import com.surya.payload.response.PageResponse;
 import com.surya.repository.BookLoanRepository;
 import com.surya.repository.BookRepository;
 import com.surya.repository.ReservationRepository;
+import com.surya.services.BookLoanService;
 import com.surya.services.ReservationService;
 import com.surya.services.UserService;
 
@@ -32,6 +39,7 @@ public class ReservationServiceImpl implements ReservationService {
     private final BookRepository bookRepository;
     private final ReservationRepository reservationRepository;
     private final ReservationMapper reservationMapper;
+    private final BookLoanService bookLoanService;
 
     int MAX_RESERVATION = 5;
 
@@ -117,8 +125,30 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public ReservationDTO fulfillReservation(Long reservationId) {
-        return null;
+    public ReservationDTO fulfillReservation(Long reservationId) throws Exception {
+
+        Reservation reservation = reservationRepository.findById(reservationId)
+                .orElseThrow(
+                        () -> new Exception(
+                                "Reservation Not Found With ID : " + reservationId));
+
+        if (reservation.getBook().getAvailableCopies() <= 0) {
+            throw new Exception(
+                    "Reservation Is Not Available For Pickup ");
+        }
+
+        reservation.setStatus(ReservationStatus.FULFILLED);
+        reservation.setFulfilledAt(LocalDateTime.now());
+
+        Reservation savedReservation = reservationRepository.save(reservation);
+
+        CheckoutRequest request = new CheckoutRequest();
+        request.setBookId(reservation.getBook().getId());
+        request.setNotes("Assigned Book By Admin");
+
+        bookLoanService.checkoutBookForUser(reservation.getUser().getId(), request);
+
+        return reservationMapper.toDTO(savedReservation);
     }
 
     @Override
@@ -128,7 +158,43 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public PageResponse<ReservationDTO> searchReservations(ReservationSearchRequest searchRequest) {
-        return null;
+
+        Pageable pageable = createPageable(searchRequest);
+
+        Page<Reservation> reservationPage = reservationRepository.searchReservationsWithFilters(
+                searchRequest.getUserId(),
+                searchRequest.getBookId(),
+                searchRequest.getStatus(),
+                searchRequest.getActiveOnly() != null ? searchRequest.getActiveOnly() : false,
+                pageable);
+
+        return buildPageResponse(reservationPage);
+    }
+
+    private PageResponse<ReservationDTO> buildPageResponse(Page<Reservation> reservationPage) {
+
+        List<ReservationDTO> dtos = reservationPage.getContent().stream()
+                .map(reservationMapper::toDTO)
+                .toList();
+
+        PageResponse<ReservationDTO> response = new PageResponse<>();
+
+        response.setContent(dtos);
+        response.setPageNumber(reservationPage.getNumber());
+        response.setPageSize(reservationPage.getSize());
+        response.setTotalElements(reservationPage.getTotalElements());
+        response.setTotalPages(reservationPage.getTotalPages());
+        response.setLast(reservationPage.isLast());
+
+        return response;
+    }
+
+    private Pageable createPageable(ReservationSearchRequest searchRequest) {
+        Sort sort = "ASC".equalsIgnoreCase(searchRequest.getSortDirection())
+                ? Sort.by(searchRequest.getSortBy()).ascending()
+                : Sort.by(searchRequest.getSortBy()).descending();
+
+        return PageRequest.of(searchRequest.getPage(), searchRequest.getSize(), sort);
     }
 
 }
