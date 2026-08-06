@@ -2,6 +2,7 @@ package com.surya.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,7 @@ public class WishlistController {
                 "Book Removed From Wishlist Successfully", true));
     }
 
+    @GetMapping("/my-wishlist")
     public ResponseEntity<?> getMyWishlist(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) throws Exception {

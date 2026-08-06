@@ -59,11 +59,13 @@ public class WishlistServiceImpl implements WishlistService {
     public void removeFromWishlist(Long bookId) throws Exception {
         User user = userService.getCurrentUser();
 
-        if (!wishlistRepository.existsByUserIdAndBookId(user.getId(), bookId)) {
+        Wishlist wishlist = wishlistRepository.findByUserIdAndBookId(user.getId(), bookId);
+
+        if (wishlist == null) {
             throw new Exception("Book is Not in Your Wishlist");
         }
 
-        wishlistRepository.deleteByUserIdAndBookId(user.getId(), bookId);
+        wishlistRepository.delete(wishlist);
     }
 
     @Override
