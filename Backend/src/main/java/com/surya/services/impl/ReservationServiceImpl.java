@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.surya.domain.BookLoanStatus;
 import com.surya.domain.ReservationStatus;
+import com.surya.domain.UserRole;
 import com.surya.mapper.ReservationMapper;
 import com.surya.modal.Book;
 import com.surya.modal.Reservation;
@@ -89,8 +90,30 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public ReservationDTO cancelReservation(Long reservationId) {
-        return null;
+    public ReservationDTO cancelReservation(Long reservationId) throws Exception {
+
+        Reservation reservation = reservationRepository.findById(reservationId)
+                .orElseThrow(
+                        () -> new Exception(
+                                "Reservation Not Found With Id : " + reservationId));
+
+        User currentUser = userService.getCurrentUser();
+
+        if (!reservation.getUser().getId().equals(currentUser.getId())
+                && currentUser.getRole() != UserRole.ROLE_ADMIN) {
+            throw new Exception("You Can Only Cancel Your Own Reservation");
+        }
+
+        if (!reservation.canBeCancelled()) {
+            throw new Exception("Reservation Cannot Be Cancelled (Current Status : " + reservation);
+        }
+
+        reservation.setStatus(ReservationStatus.CANCELLED);
+        reservation.setCancelledAt(LocalDateTime.now());
+
+        Reservation savedReservation = reservationRepository.save(reservation);
+
+        return reservationMapper.toDTO(savedReservation);
     }
 
     @Override
