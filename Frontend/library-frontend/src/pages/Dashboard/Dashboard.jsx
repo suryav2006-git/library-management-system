@@ -7,8 +7,7 @@ const Dashboard = () => {
     bg-purple-500 py-8'>
       <div className='max-w-7xl px-4 sm:px-6 lg:px-8'>
 
-        <div classNam
-          e='mb-8 animate-fade-in-up'>
+        <div className='mb-8 animate-fade-in-up'>
           
           <h1 className='text-4xl font-bold text-indigo-500 mb-2'>
 
@@ -18,7 +17,7 @@ const Dashboard = () => {
             </span>
           </h1>
 
-          <p className='text-lg text-gray-600' >
+          <p className='text-lg text-gray-600 bgColor' >
             Track Your Reading Journey And Manage Your Library
           </p>
 
@@ -27,8 +26,16 @@ const Dashboard = () => {
         {/* State Card */}
 
         <div>
-          {[1,1,1,1].map((item, index)=><StateCard key={index}/>)}
+            {[1, 1, 1, 1].map((item, index) => (
+                <StateCard
+                    bgColor="bg-indigo-50"
+                    textColor="text-indigo-600"
+                    icon = {<Library}
+                    key={index}
+                />
+            ))}
         </div>
+
 
       </div>
     </div>
