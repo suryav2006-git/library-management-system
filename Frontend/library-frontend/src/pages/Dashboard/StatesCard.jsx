@@ -1,8 +1,6 @@
-import React from 'react'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-
-const StateCard = (bgColor, icon, value, title, subtitle, textColor) => {
+const StateCard = ({bgColor, icon, value, title, subtitle, textColor}) => {
   return (
     <Card>
       <CardContent>

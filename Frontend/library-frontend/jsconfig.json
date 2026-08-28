@@ -1,0 +1,15 @@
+{
+    "$schema": "https://json.schemastore.org/jsconfig",
+    "compilerOptions": {
+        "module": "EsNext",
+        "moduleResolution":"node",
+        "target": "ES6",
+        "jsx": "react-jsx",
+        "checkJs": false
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "build"
+    ]
+}

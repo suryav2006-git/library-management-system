@@ -1,7 +1,14 @@
-import React from 'react'
-import StateCard from './StatesCard'
+import { statsConfig } from './StateConfig';
+import StatesCard from './StatesCard';
 
 const Dashboard = () => {
+
+  const stateData = statsConfig({
+      myLoans: [1,2,3],
+      reservations: [1,2],
+      stats: {readingStreak : 5}
+  });
+
   return (
     <div className='min-h-screen bg-gradient-to-br from-indigo-50 via-white to 
     bg-purple-500 py-8'>
@@ -25,21 +32,25 @@ const Dashboard = () => {
 
         {/* State Card */}
 
-        <div>
-            {[1, 1, 1, 1].map((item, index) => (
-                <StateCard
-                    bgColor="bg-indigo-50"
-                    textColor="text-indigo-600"
-                    icon = {<Library}
-                    key={index}
-                />
-            ))}
+        <div className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {
+            stateData.map((item) => <StatesCard
+                bgColor={item.bgColor}
+                textColor = {item.textColor}
+                icon={item.icon}
+                value={item.value}
+                title={item.title}
+                subtitle={item.subtitle}
+                key={item.id}
+            />
+          )
+          }
         </div>
 
 
       </div>
     </div>
-  )
+  );
 }
 
 export default Dashboard
