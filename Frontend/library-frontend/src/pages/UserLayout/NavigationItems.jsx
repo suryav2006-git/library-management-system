@@ -9,7 +9,6 @@ import {
     Settings as SettingsIcon
 } from '@mui/icons-material';
 
-
 export const secondaryItems = [
     {
         title: 'Profile',

@@ -1,6 +1,7 @@
 import { Box, Toolbar } from "@mui/material";
 import { Outlet } from "react-router";
 import UserSidebar from "./UserSidebar";
+import Navbar from "./Navbar";
 
 const drawerWidth = 280;
 
@@ -13,7 +14,7 @@ const UserLayout = () => {
         }} >
 
             {/* App Bar */}
-
+            <Navbar />
 
             {/* Profile Menu */}
 
