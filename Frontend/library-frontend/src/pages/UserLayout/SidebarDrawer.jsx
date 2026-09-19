@@ -3,18 +3,14 @@ import { Avatar, Box, Divider, List, ListItem, ListItemButton, ListItemIcon, Too
 import { alpha } from '@mui/material/styles';
 import { useLocation, useNavigate } from 'react-router';
 import { navigationItems, secondaryItems } from './NavigationItems';
+import { isActive } from './util';
 
 const SidebarDrawer = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
 
-    const isActive = (path) => {
-        if (path == "/") {
-            return location.pathname === '/';
-        }
-        return location.pathname.startsWith(path);
-    }
+
 
     const handleChangePath = (path) => {
         navigate(path);
@@ -155,7 +151,7 @@ const SidebarDrawer = () => {
 
                 {/* Secondary Navigation Items */}
                 {secondaryItems.map((item, index) => {
-                    const active = isActive(item.path);
+                    const active = isActive(item.path, location);
                     return <ListItem key={index} >
 
                         <Tooltip title={item.description} placement='right' >

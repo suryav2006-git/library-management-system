@@ -2,17 +2,18 @@ import { Box, Toolbar } from "@mui/material";
 import { Outlet } from "react-router";
 import UserSidebar from "./UserSidebar";
 
-const drawerWidth = "240px";
+const drawerWidth = 280;
 
 const UserLayout = () => {
     return (
         <Box sx={{
             display: "flex",
             minHeight: "100vh",
-            bgColor: "white",
+            bgcolor: "white",
         }} >
 
             {/* App Bar */}
+
 
             {/* Profile Menu */}
 

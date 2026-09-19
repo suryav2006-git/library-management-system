@@ -4,8 +4,13 @@
         "module": "EsNext",
         "target": "ES6",
         "jsx": "react-jsx",
-        "checkJs": false
+        "checkJs": false,
+        "baseUrl": "."
     },
+    "include" : [
+        "src/**/*"
+    ]
+    ,
     "exclude": [
         "node_modules",
         "dist",
