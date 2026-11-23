@@ -61,7 +61,7 @@ const MyReservationCard = ({ reservation }) => {
                     <div className="flex items-center gap-2" >
                         <AccessAlarm className="w-4 h-4 text-gray-400 mt-0.5" />
                         <div>
-                            <p className="text-xs font-semibold text-gray-500 uppercase" >
+                            <p className="text-xs font-semibold text-gray-500 uppercase " >
                                 Reserved
                             </p>
                             <p className="text-sm font-semibold text-gray-700">
