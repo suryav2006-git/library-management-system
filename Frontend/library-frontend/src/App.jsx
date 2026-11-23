@@ -9,14 +9,20 @@ import Profile from './pages/Profile/Profile'
 import Settings from './pages/Settings/Settings'
 import Subscription from './pages/Subscription/Subscription'
 import UserLayout from './pages/UserLayout/UserLayout'
+import Wishlist from "./pages/Wishlist/Wishlist";
+import Login from "./pages/Login/Login";
 
 function App() {
 
   return (
     <>
-      {/* User Routes */}
+      
       <Routes>
 
+        {/* Login Route */}
+        <Route path="/login" element={<Login />} />
+
+        {/* User Routes */}
         <Route element={<UserLayout />} >
           <Route path='/' element={<Dashboard />} />
           <Route path='/books' element={<BookPage />} />
@@ -24,7 +30,7 @@ function App() {
           <Route path='/my-reservations' element={<MyReservation />} />
           <Route path="/my-fines" element={<MyFine />} />
           <Route path='/subscriptions' element={<Subscription />} />
-          <Route path='/wishlist' element={<Dashboard />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/profile" element={<Profile />} />
           <Route path='/settings' element={<Settings />} />
 

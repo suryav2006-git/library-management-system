@@ -9,6 +9,8 @@ import {
     Settings as SettingsIcon
 } from '@mui/icons-material';
 
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+
 export const secondaryItems = [
     {
         title: 'Profile',

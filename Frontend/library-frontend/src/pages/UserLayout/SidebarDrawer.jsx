@@ -17,8 +17,8 @@ const SidebarDrawer = () => {
     }
 
     const handleLogout = () => {
-        console.log("logout");
-    }
+        navigate("/login");
+    };
 
     return (
         <Box
