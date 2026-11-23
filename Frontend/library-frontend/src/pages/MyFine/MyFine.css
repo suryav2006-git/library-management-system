@@ -1,0 +1,232 @@
+/* Main Page */
+
+.myfine-page {
+    padding: 20px;
+    min-height: 100vh;
+
+    background: linear-gradient(
+        135deg,
+        #f8fafc 0%,
+        #eef2ff 100%
+    );
+}
+
+
+/* Header */
+
+.myfine-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.myfine-header h4 {
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #9333ea
+    );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.myfine-header-icon {
+    width: 50px !important;
+    height: 50px !important;
+
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #9333ea
+    ) !important;
+}
+
+
+/* Statistics */
+
+.myfine-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 22px;
+
+    border-radius: 14px !important;
+    border: 1px solid #e2e8f0;
+
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04) !important;
+
+    transition: all 0.3s ease;
+}
+
+.myfine-stat-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.12) !important;
+}
+
+.myfine-stat-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+}
+
+.myfine-stat-icon svg {
+    font-size: 27px;
+}
+
+.myfine-stat-value {
+    font-size: 25px !important;
+    font-weight: 700 !important;
+    color: #1e293b;
+}
+
+.myfine-stat-title {
+    font-size: 13px !important;
+    color: #64748b;
+}
+
+
+/* Main Content */
+
+.myfine-content {
+    margin-top: 28px;
+    padding: 25px;
+
+    border-radius: 15px !important;
+    border: 1px solid #e2e8f0;
+
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04) !important;
+}
+
+.myfine-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+
+/* Toolbar */
+
+.myfine-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin: 22px 0;
+}
+
+.myfine-search {
+    width: 350px;
+}
+
+
+/* Table */
+
+.myfine-table-container {
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+.myfine-table-container .MuiTableHead-root {
+    background: #f8fafc;
+}
+
+.myfine-table-container .MuiTableCell-head {
+    font-weight: 700;
+    color: #475569;
+    white-space: nowrap;
+}
+
+.myfine-table-container .MuiTableCell-body {
+    color: #334155;
+    white-space: nowrap;
+}
+
+.myfine-book-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.myfine-book-icon {
+    width: 40px !important;
+    height: 40px !important;
+
+    background: #eef2ff !important;
+    color: #6366f1 !important;
+}
+
+
+/* Details Dialog */
+
+.fine-dialog-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.fine-dialog-icon {
+    width: 50px !important;
+    height: 50px !important;
+
+    background: #eef2ff !important;
+    color: #6366f1 !important;
+}
+
+.fine-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #f1f5f9;
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+    .myfine-page {
+        padding: 12px;
+    }
+
+    .myfine-content {
+        padding: 15px;
+    }
+
+    .myfine-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .myfine-search {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .myfine-header h4 {
+        font-size: 25px;
+    }
+
+    .myfine-content-header {
+        align-items: flex-start;
+    }
+
+}

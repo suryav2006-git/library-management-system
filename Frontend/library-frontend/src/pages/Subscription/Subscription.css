@@ -1,0 +1,349 @@
+/* Main Page */
+
+.subscription-page {
+    padding: 20px;
+    min-height: 100vh;
+
+    background: linear-gradient(
+        135deg,
+        #f8fafc 0%,
+        #eef2ff 100%
+    );
+}
+
+
+/* Header */
+
+.subscription-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.subscription-header h4 {
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #9333ea
+    );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subscription-header-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #9333ea
+    );
+
+    font-size: 28px;
+}
+
+
+/* Current Subscription */
+
+.current-subscription {
+    padding: 28px;
+
+    border-radius: 18px !important;
+
+    color: white !important;
+
+    background: linear-gradient(
+        120deg,
+        #1e293b,
+        #4338ca,
+        #7e22ce
+    ) !important;
+
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2) !important;
+}
+
+.current-subscription-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.current-subscription-top > .MuiChip-root {
+    margin-left: auto;
+    background: #dcfce7;
+    color: #15803d;
+    font-weight: 600;
+}
+
+.current-plan-icon {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.15);
+}
+
+.current-plan-icon svg {
+    font-size: 35px;
+}
+
+.current-subscription-top h5 {
+    margin-top: 5px;
+}
+
+.subscription-details-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.subscription-detail {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.subscription-detail > svg {
+    font-size: 25px;
+    opacity: 0.8;
+}
+
+.subscription-detail .MuiTypography-caption {
+    opacity: 0.7;
+}
+
+.subscription-detail .MuiTypography-body1 {
+    font-size: 14px;
+}
+
+
+/* Pricing Header */
+
+.pricing-header {
+    text-align: center;
+    margin: 45px 0 30px;
+}
+
+.pricing-header h5 {
+    color: #1e293b;
+}
+
+.billing-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+
+/* Subscription Cards */
+
+.subscription-plans {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    align-items: stretch;
+}
+
+.subscription-plan-card {
+    padding: 25px;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 16px !important;
+    border: 1px solid #e2e8f0;
+
+    box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05) !important;
+
+    transition: all 0.3s ease;
+}
+
+.subscription-plan-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.12) !important;
+}
+
+.popular-plan {
+    border: 2px solid #6366f1 !important;
+}
+
+.popular-badge {
+    position: absolute;
+    top: -13px;
+    right: 20px;
+
+    color: white !important;
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #9333ea
+    ) !important;
+}
+
+.plan-icon {
+    margin-bottom: 15px;
+}
+
+.plan-icon svg {
+    font-size: 35px;
+}
+
+.plan-description {
+    margin-top: 8px !important;
+    min-height: 40px;
+}
+
+.plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.plan-price h3 {
+    color: #1e293b;
+}
+
+.plan-features {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.plan-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.plan-feature svg {
+    color: #10b981;
+    font-size: 19px;
+    flex-shrink: 0;
+}
+
+.plan-feature p {
+    color: #475569;
+}
+
+.plan-action {
+    margin-top: auto;
+}
+
+.plan-action button {
+    padding: 11px;
+    border-radius: 9px;
+    text-transform: none;
+    font-weight: 600;
+
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #9333ea
+    );
+}
+
+
+/* Billing History */
+
+.billing-history {
+    margin-top: 35px;
+    padding: 25px;
+
+    border-radius: 15px !important;
+    border: 1px solid #e2e8f0;
+
+    box-shadow: 0 5px 20px rgba(15, 23, 42, 0.04) !important;
+}
+
+.billing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.billing-history .MuiTableHead-root {
+    background: #f8fafc;
+}
+
+.billing-history .MuiTableCell-head {
+    font-weight: 700;
+    color: #475569;
+    white-space: nowrap;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+
+    .subscription-plans {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .subscription-details-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .subscription-page {
+        padding: 12px;
+    }
+
+    .subscription-plans {
+        grid-template-columns: 1fr;
+    }
+
+    .subscription-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .current-subscription {
+        padding: 20px;
+    }
+
+    .current-subscription-top {
+        flex-wrap: wrap;
+    }
+
+    .current-subscription-top > .MuiChip-root {
+        margin-left: 0;
+    }
+
+    .pricing-header {
+        margin-top: 35px;
+    }
+
+    .billing-history {
+        padding: 15px;
+    }
+
+}
