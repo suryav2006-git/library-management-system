@@ -1,19 +1,26 @@
 {
     "$schema": "https://json.schemastore.org/jsconfig",
     "compilerOptions": {
-        "module": "EsNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
         "target": "ES6",
         "jsx": "react-jsx",
         "checkJs": false,
-        "baseUrl": "."
+        "skipLibCheck": true,
+        "disableSizeLimit": false,
+        // "baseUrl": "."
     },
-    "include" : [
+    "typeAcquisition": {
+        "enable": false
+    },
+    "include": [
         "src/**/*"
-    ]
-    ,
+    ],
     "exclude": [
         "node_modules",
         "dist",
-        "build"
+        "build",
+        ".next",
+        "coverage"
     ]
 }
