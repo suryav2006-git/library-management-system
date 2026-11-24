@@ -1,6 +1,6 @@
 # 📚 Library Management System (Full-Stack)
 
-A production-ready, full-stack **Library Management System** built with **Java Spring Boot** and **React (Vite)**. Designed to streamline digital library operations—including role-based authentication, book catalog management, loan lifecycles, reservations, fine calculations, email notifications, and payment gateway integration.
+A full-stack **Library Management System** built with **Java Spring Boot** and **React (Vite)**. Designed to streamline digital library operations—including role-based authentication, book catalog management, loan lifecycles, reservations, fine calculations, email notifications, and payment gateway integration.
 
 ---
 
@@ -106,7 +106,7 @@ cd library-management-system
    ```
 2. Create a `.env` file inside `Backend/` with your local configuration:
    ```env
-   DB_URL=jdbc:mysql://localhost:3306/library_yt
+   DB_URL=jdbc:mysql://localhost:3306/library_db
    DB_USERNAME=root
    DB_PASSWORD=your_mysql_password
    MAIL_USERNAME=your_email@gmail.com
@@ -132,13 +132,6 @@ cd library-management-system
    pnpm dev
    ```
    The application will be available at `http://localhost:5173`.
-
----
-
-## 🙏 Acknowledgments
-
-* Built alongside the Java Full Stack Library Management System tutorial series by [**CodeWithZosh**](https://www.youtube.com/@codewithzosh), containerized with Docker, and deployed across TiDB Cloud, Render, and Vercel.
-
 
 ---
 
