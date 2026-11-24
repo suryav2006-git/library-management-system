@@ -9,6 +9,28 @@ A production-ready, full-stack **Library Management System** built with **Java S
 * **Live Frontend (Vercel):** [https://library-management-system-plum-kappa.vercel.app](https://library-management-system-plum-kappa.vercel.app)
 * **Live Backend API (Render):** [https://library-management-system-1mh6.onrender.com](https://library-management-system-1mh6.onrender.com)
 * **Cloud Database:** TiDB Cloud (MySQL-Compatible Serverless Cluster)
+---
+## 📸 Screenshots
+
+A tour of the member portal, captured from the live deployment.
+
+| Dashboard | Browse Books |
+| :---: | :---: |
+| ![Dashboard with loan stats, reading goal, and current loans](https://raw.githubusercontent.com/suryav2006-git/library-management-system/main/Frontend/library-frontend/screenshots/01-dashboard.png) | ![Book catalog with genre and availability filters](https://raw.githubusercontent.com/suryav2006-git/library-management-system/main/Frontend/library-frontend/screenshots/02-browse-books.png) |
+
+| My Loans | Reservations |
+| :---: | :---: |
+| ![Borrowed books filtered by status](https://raw.githubusercontent.com/suryav2006-git/library-management-system/main/Frontend/library-frontend/screenshots/03-my-loans.png) | ![Reservation lifecycle cards: pending, available, fulfilled, cancelled, expired](https://raw.githubusercontent.com/suryav2006-git/library-management-system/main/Frontend/library-frontend/screenshots/04-reservations.png) |
+
+| Fines | Subscriptions |
+| :---: | :---: |
+| ![Fine summary and searchable fine history](https://raw.githubusercontent.com/suryav2006-git/library-management-system/main/Frontend/library-frontend/screenshots/05-fines.png) | ![Free, Basic, and Premium membership plans](https://raw.githubusercontent.com/suryav2006-git/library-management-system/main/Frontend/library-frontend/screenshots/06-subscriptions.png) |
+
+| Wishlist | Profile |
+| :---: | :---: |
+| ![Saved books with availability badges](https://raw.githubusercontent.com/suryav2006-git/library-management-system/main/Frontend/library-frontend/screenshots/07-wishlist.png) | ![Member profile, library statistics, and membership details](https://raw.githubusercontent.com/suryav2006-git/library-management-system/main/Frontend/library-frontend/screenshots/08-profile.png) |
+
+---
 
 > **⚠️ Note for Reviewers & Testers:** The backend API is hosted on Render's free tier, which spins down after 15 minutes of inactivity. Please allow **30–50 seconds** for the server to cold-start on the very first request.
 
