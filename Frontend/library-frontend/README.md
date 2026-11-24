@@ -56,7 +56,7 @@ A tour of the member portal, captured from the live deployment.
 - **Subscriptions:** Compare Free, Basic, and Premium plans with monthly or yearly billing, and review billing history
 - **Online payments:** Pay for fines and subscriptions with Razorpay
 - **Wishlist:** Save books for later and see their availability at a glance
-- **Profile and settings:** Membership details, reading statistics, appearance (dark mode), notifications, language, and security options
+- **Profile and settings:** Membership details, reading statistics, appearance, notifications, language, and security options
 
 ### 🛠️ Admin Portal
 - **Inventory management:** Add, edit, and remove books (individually or in bulk)
@@ -128,7 +128,6 @@ pnpm install
 
 Create a `.env` file in `Frontend/library-frontend/`:
 
-<!-- Replace the variable name below with the one your code actually reads (import.meta.env.XXX) -->
 ```env
 VITE_API_BASE_URL=http://localhost:8080
 ```
@@ -180,7 +179,7 @@ The frontend is deployed on **Vercel**.
 
 ## 🙏 Acknowledgments
 
-Built alongside the Java Full Stack Library Management System tutorial series by [**CodeWithZosh**](https://www.youtube.com/@codewithzosh), then extended, containerized, and deployed across TiDB Cloud, Render, and Vercel.
+Built alongside the Java Full Stack Library Management System tutorial series by [**CodeWithZosh**](https://www.youtube.com/@codewithzosh), containerized, and deployed across TiDB Cloud, Render, and Vercel.
 
 ---
 
