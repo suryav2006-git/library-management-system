@@ -36,7 +36,7 @@ A tour of the member portal, captured from the live deployment.
 
 ---
 
-## ✨ Key Features (Backend)
+## ✨ Key Features
 
 * **Authentication & RBAC:** Stateless JWT and Google OAuth2 login, `ADMIN`/`USER` role permissions, and SMTP password recovery.
 * **Inventory & Catalog Management:** Bulk/single book creation with unique ISBN validation, soft/hard deletion, real-time stock tracking, and multi-filter paginated search.
@@ -47,7 +47,7 @@ A tour of the member portal, captured from the live deployment.
 * **Fine & Penalty Engine:** Automated overdue, lost, and damaged book penalties supporting online settlement and admin waivers.
 * **Razorpay Integration:** End-to-end payment link generation, verification, and event-driven activation for subscriptions and fines.
 * **Verified Reviews & Wishlists:** Personal wishlists and book reviews restricted to members who have completed a loan for the title.
-* **Role-Based Dashboards (Frontend) :** Dedicated member portal for loans, holds, reading goals, and fines, alongside an admin dashboard for inventory and revenue analytics.
+* **Role-Based Dashboards :** Dedicated member portal for loans, holds, reading goals, and fines, alongside an admin dashboard for inventory and revenue analytics.
 
 
 ---
@@ -106,7 +106,7 @@ cd library-management-system
    ```
 2. Create a `.env` file inside `Backend/` with your local configuration:
    ```env
-   DB_URL=jdbc:mysql://localhost:3306/library_db
+   DB_URL=jdbc:mysql://localhost:3306/library_yt
    DB_USERNAME=root
    DB_PASSWORD=your_mysql_password
    MAIL_USERNAME=your_email@gmail.com
@@ -133,6 +133,12 @@ cd library-management-system
    ```
    The application will be available at `http://localhost:5173`.
 
+---
+
+## 🙏 Acknowledgments
+
+* Built alongside the Java Full Stack Library Management System tutorial series by [**CodeWithZosh**](https://www.youtube.com/@codewithzosh), containerized with Docker, and deployed across TiDB Cloud, Render, and Vercel.
+  
 ---
 
 ## 📄 License
