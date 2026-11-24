@@ -1,89 +1,125 @@
-# 📚 Production-Grade Library Management System (Java Full-Stack)
+# 📚 Library Management System (Full-Stack)
 
-A robust, enterprise-ready full-stack application designed to handle complex library lifecycles, real-time tracking, recursive catalog categorization, and financial audit logging.
-
----
-
-## 🛠️ Tech Stack & Ecosystem
-
-- **Backend:** Java, Spring Boot, Spring Data JPA, Hibernate
-- **Database:** Relational Database (SQL-compliant) with performance indices
-- **Architecture:** Monolithic REST API with Data Transfer Object (DTO) patterns
-- **Data Formats:** Strict JSON payload handling with comprehensive exception mapping
+A production-ready, full-stack **Library Management System** built with **Java Spring Boot** and **React (Vite)**. Designed to streamline digital library operations—including role-based authentication, book catalog management, loan lifecycles, reservations, fine calculations, email notifications, and payment gateway integration.
 
 ---
 
-## 📊 Core Architecture & Relational Entities
+## 🌐 Live Deployment
 
-The system relies on six deeply coupled operational entities to ensure business rules remain transactional across the application lifecycle:
+* **Live Frontend (Vercel):** [https://library-management-system-plum-kappa.vercel.app](https://library-management-system-plum-kappa.vercel.app)
+* **Live Backend API (Render):** [https://library-management-system-1mh6.onrender.com](https://library-management-system-1mh6.onrender.com)
+* **Cloud Database:** TiDB Cloud (MySQL-Compatible Serverless Cluster)
 
-### 1. Book Catalog System
-- Maps a core product lifecycle with automated validations.
-- Implements comprehensive tracking across fields like unique `isbn` strings, soft-delete boolean tracking flags (`active`), and auto-managed timestamps.
-- Includes bulk operation controller endpoints (`POST /api/books/bulk`) to fast-track catalog scaling.
-
-### 2. Recursive Genre Hierarchy
-- Supports an unlimited nested sub-genre tree architecture structure (`Fiction ➔ Mystery ➔ Detective Fiction`).
-- Configured with a self-referential `parentGenre` field mapping and high-performance querying indices on indexed data categories (`code`, `name`, `active`).
-
-### 3. Book Loan & Checkout Pipeline
-- Manages the transactional borrowing workflow from initialization to check-in.
-- Uses a stateful `BookLoanStatus` ENUM (`CHECKED_OUT`, `RETURNED`, `OVERDUE`) coupled with dynamic logic thresholds preventing renewals on delinquent or maxed accounts.
-
-### 4. Automated Fine & Transaction Audit
-- Decouples financial penalization from raw loans to enforce granular monitoring, waivers, and transaction tracking.
-- Evaluates real-time statuses (`PENDING`, `PARTIALLY_PAID`, `PAID`, `WAIVED`) and dynamic balance reductions through internal methods.
-
-### 5. Multi-User Waiting Queue (Reservations)
-- Implements automated queuing patterns when targeted inventory numbers drop to zero copies.
-- Features lifecycle transitions along with real-time queue position lookup strategies (`GET /api/reservations/{id}/queue-position`).
-
-### 6. Subscription Membership Tracks
-- Segregates user groups into specific multi-tier access plans like `GOLD_001` or `PLATINUM_001`.
-- Enforces runtime checks evaluating maximum concurrent book bounds and personalized checkout window policies.
+> **⚠️ Note for Reviewers & Testers:** The backend API is hosted on Render's free tier, which spins down after 15 minutes of inactivity. Please allow **30–50 seconds** for the server to cold-start on the very first request.
 
 ---
 
-## 🚀 Quick Setup Instructions
+## ✨ Key Features (Backend)
 
-Get the project up and running locally in less than two minutes:
+* **Authentication & RBAC:** Stateless JWT and Google OAuth2 login, `ADMIN`/`USER` role permissions, and SMTP password recovery.
+* **Inventory & Catalog Management:** Bulk/single book creation with unique ISBN validation, soft/hard deletion, real-time stock tracking, and multi-filter paginated search.
+* **Hierarchical Genres:** Unlimited-depth parent-child category trees with active status toggles, custom ordering, and book counts.
+* **Book Loan Lifecycle:** Automated checkout, return, and renewal workflows enforcing membership limits, renewal caps, and condition tracking (`RETURNED`, `OVERDUE`, `LOST`, `DAMAGED`).
+* **FIFO Reservation Queue:** Automated waitlist for out-of-stock titles featuring queue tracking, pickup windows, and instant fulfillment on return.
+* **Subscription & Membership Control:** Configurable membership tiers defining borrow limits and loan durations with immutable plan snapshots.
+* **Fine & Penalty Engine:** Automated overdue, lost, and damaged book penalties supporting online settlement and admin waivers.
+* **Razorpay Integration:** End-to-end payment link generation, verification, and event-driven activation for subscriptions and fines.
+* **Verified Reviews & Wishlists:** Personal wishlists and book reviews restricted to members who have completed a loan for the title.
+* **Role-Based Dashboards (Frontend) :** Dedicated member portal for loans, holds, reading goals, and fines, alongside an admin dashboard for inventory and revenue analytics.
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/suryav2006-git/library-management-system.git
 
-# 2. Build the application and download dependencies
-mvn clean install
+---
 
-# 3. Boot up the Spring Boot application
-./mvnw spring-boot:run
+## 🛠️ Tech Stack
+
+| Layer | Technologies |
+| :--- | :--- |
+| **Backend** | Java 17, Spring Boot 4, Spring Security, Spring Data JPA (Hibernate), Spring Mail, Maven |
+| **Frontend** | React, Vite, JavaScript (ES6+), CSS, pnpm |
+| **Database** | MySQL / TiDB Cloud |
+| **Security & Payments** | JWT (`jjwt`), Razorpay Java SDK |
+| **DevOps & Hosting** | Docker (Multi-stage build), Render (Backend), Vercel (Frontend), GitHub |
+
+---
+
+## 📂 Project Structure
+
+```text
+library-management-system/
+├── Backend/                        # Spring Boot REST API
+│   ├── src/main/java/com/surya/    # Controllers, Services, Repositories, Models, Security
+│   ├── src/main/resources/         # application.properties (environment-driven)
+│   ├── Dockerfile                  # Multi-stage Maven + Temurin 17 Docker build
+│   └── pom.xml                     # Maven dependencies
+│
+├── Frontend/
+│   └── library-frontend/           # React + Vite SPA
+│       ├── src/                    # Pages, components, assets
+│       ├── vercel.json               # SPA client-side routing rewrite rules
+│       └── package.json            # Frontend dependencies (pnpm)
+│
+├── LICENSE                         # MIT License
+└── README.md
 ```
-*Note: Make sure your target database server is active and running locally before booting up the application.*
 
 ---
 
-## 🤝 Connect & Support
+## 🚀 Running Locally
 
-Thank you for checking out my Production-Grade Library Management System! This project represents my commitment to clean architecture, type-safe business rules, and scalable database design. 
+### Prerequisites
+* **Java 17+** and **Maven**
+* **Node.js 18+** and **pnpm**
+* **MySQL 8.0+** (or a free TiDB Cloud cluster)
 
-If you are a tech recruiter, an open-source contributor, or a fellow software engineering student, I would love to connect with you!
+### 1. Clone the Repository
+```bash
+git clone https://github.com/suryav2006-git/library-management-system.git
+cd library-management-system
+```
 
-<p align="left">
-  <a href="mailto:mrstudieshelper@gmail.com"><img src="https://shields.io" alt="Email Me"/></a> 
-  <a href="https://www.linkedin.com/in/suryav2006-lin"><img src="https://shields.io" alt="LinkedIn"/></a> 
-  <a href="https://leetcode.com/u/suryav2006-lee/"><img src="https://shields.io" alt="LeetCode"/></a>
-</p>
+### 2. Configure & Run the Backend
+1. Navigate to the `Backend` folder:
+   ```bash
+   cd Backend
+   ```
+2. Create a `.env` file inside `Backend/` with your local configuration:
+   ```env
+   DB_URL=jdbc:mysql://localhost:3306/library_yt
+   DB_USERNAME=root
+   DB_PASSWORD=your_mysql_password
+   MAIL_USERNAME=your_email@gmail.com
+   MAIL_PASSWORD=your_gmail_app_password
+   RAZORPAY_KEY_ID=your_razorpay_test_key
+   RAZORPAY_KEY_SECRET=your_razorpay_test_secret
+   FRONTEND_URL=http://localhost:5173
+   ```
+3. Start the Spring Boot server:
+   ```bash
+   ./mvnw spring-boot:run
+   ```
+   The API will start on `http://localhost:8080`.
+
+### 3. Configure & Run the Frontend
+1. Open a new terminal and navigate to `Frontend/library-frontend`:
+   ```bash
+   cd Frontend/library-frontend
+   ```
+2. Install dependencies and start the Vite development server:
+   ```bash
+   pnpm install
+   pnpm dev
+   ```
+   The application will be available at `http://localhost:5173`.
 
 ---
 
-## 🎓 Acknowledgements & Credits
+## 🙏 Acknowledgments
 
-While every line of this codebase was written, typed, and debugged by hand to master these architectural patterns, the foundational design, database schema concepts, and full-stack integration strategies were inspired by the tutorials on the **[Code With Zosh YouTube Channel](https://youtube.com/@codewithzosh)**.
+* Built alongside the Java Full Stack Library Management System tutorial series by [**CodeWithZosh**](https://www.youtube.com/@codewithzosh), containerized with Docker, and deployed across TiDB Cloud, Render, and Vercel.
+
 
 ---
 
 ## 📄 License
-This repository is open-source and licensed under the **MIT License**. Feel free to fork it, explore the code optimization frameworks, or adapt the database schemas for your own workflows.
 
-***
-*“Even if the world loses its value, I won’t lose mine.” — Built with discipline and daily momentum by Surya V.*
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
